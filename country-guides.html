@@ -452,7 +452,7 @@
 const COUNTRIES = [
   {
     code: 'GB', flag: '🇬🇧', name: 'United Kingdom', currency: 'GBP', symbol: '£',
-    taxName: 'VAT', region: 'other',
+    taxName: 'VAT', region: 'other', guideUrl: 'uk-vat-guide.html',
     threshold: 90000, rate: 20, reducedRate: 5, zeroRate: true,
     filing: 'Quarterly', deadline: 'Within 30 days of exceeding threshold',
     govLink: 'https://www.gov.uk/vat-registration', source: 'HMRC gov.uk',
@@ -460,7 +460,7 @@ const COUNTRIES = [
   },
   {
     code: 'AU', flag: '🇦🇺', name: 'Australia', currency: 'AUD', symbol: 'A$',
-    taxName: 'GST', region: 'other',
+    taxName: 'GST', region: 'other', guideUrl: 'australia-gst-guide.html',
     threshold: 75000, rate: 10, reducedRate: null, zeroRate: false,
     filing: 'Quarterly (BAS)', deadline: 'Within 21 days of exceeding threshold',
     govLink: 'https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst', source: 'ATO ato.gov.au',
@@ -468,7 +468,7 @@ const COUNTRIES = [
   },
   {
     code: 'CA', flag: '🇨🇦', name: 'Canada', currency: 'CAD', symbol: 'C$',
-    taxName: 'GST / HST', region: 'other',
+    taxName: 'GST / HST', region: 'other', guideUrl: 'canada-gst-guide.html',
     threshold: 30000, rate: 5, reducedRate: null, zeroRate: false,
     filing: 'Annual or quarterly', deadline: 'Within 29 days of exceeding threshold',
     govLink: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html', source: 'CRA canada.ca',
@@ -476,7 +476,7 @@ const COUNTRIES = [
   },
   {
     code: 'DE', flag: '🇩🇪', name: 'Germany', currency: 'EUR', symbol: '€',
-    taxName: 'MwSt (VAT)', region: 'eu',
+    taxName: 'MwSt (VAT)', region: 'eu', guideUrl: 'germany-vat-guide.html',
     threshold: 22000, rate: 19, reducedRate: 7, zeroRate: false,
     filing: 'Monthly or quarterly', deadline: 'Before making first taxable supply',
     govLink: 'https://www.bzst.de/EN/Businesses/VAT/vat_node.html', source: 'BZSt bzst.de',
@@ -484,7 +484,7 @@ const COUNTRIES = [
   },
   {
     code: 'IE', flag: '🇮🇪', name: 'Ireland', currency: 'EUR', symbol: '€',
-    taxName: 'VAT', region: 'eu',
+    taxName: 'VAT', region: 'eu', guideUrl: 'ireland-vat-guide.html',
     threshold: 40000, rate: 23, reducedRate: 13.5, zeroRate: true,
     filing: 'Bi-monthly', deadline: 'Within 30 days of exceeding threshold',
     govLink: 'https://www.revenue.ie/en/vat/registering-for-vat/index.aspx', source: 'Revenue revenue.ie',
@@ -492,7 +492,7 @@ const COUNTRIES = [
   },
   {
     code: 'IN', flag: '🇮🇳', name: 'India', currency: 'INR', symbol: '₹',
-    taxName: 'GST', region: 'other',
+    taxName: 'GST', region: 'other', guideUrl: 'india-gst-guide.html',
     threshold: 2000000, rate: 18, reducedRate: 12, zeroRate: false,
     filing: 'Monthly (GSTR-3B)', deadline: 'Before starting business (most cases)',
     govLink: 'https://www.gst.gov.in/', source: 'GST Council gst.gov.in',
@@ -500,7 +500,7 @@ const COUNTRIES = [
   },
   {
     code: 'NL', flag: '🇳🇱', name: 'Netherlands', currency: 'EUR', symbol: '€',
-    taxName: 'BTW (VAT)', region: 'eu',
+    taxName: 'BTW (VAT)', region: 'eu', guideUrl: 'netherlands-vat-guide.html',
     threshold: 0, rate: 21, reducedRate: 9, zeroRate: true,
     filing: 'Quarterly', deadline: 'Before making first taxable supply',
     govLink: 'https://www.belastingdienst.nl/wps/wcm/connect/en/businesses-and-self-employed/businesses-and-self-employed', source: 'Belastingdienst belastingdienst.nl',
@@ -508,7 +508,7 @@ const COUNTRIES = [
   },
   {
     code: 'NZ', flag: '🇳🇿', name: 'New Zealand', currency: 'NZD', symbol: 'NZ$',
-    taxName: 'GST', region: 'other',
+    taxName: 'GST', region: 'other', guideUrl: 'new-zealand-gst-guide.html',
     threshold: 60000, rate: 15, reducedRate: null, zeroRate: false,
     filing: 'Every 2 months', deadline: 'Within 21 days of exceeding threshold',
     govLink: 'https://www.ird.govt.nz/gst/registering-for-gst', source: 'IRD ird.govt.nz',
@@ -516,7 +516,7 @@ const COUNTRIES = [
   },
   {
     code: 'ZA', flag: '🇿🇦', name: 'South Africa', currency: 'ZAR', symbol: 'R',
-    taxName: 'VAT', region: 'other',
+    taxName: 'VAT', region: 'other', guideUrl: 'south-africa-vat-guide.html',
     threshold: 1000000, rate: 15, reducedRate: null, zeroRate: true,
     filing: 'Every 2 months', deadline: 'Within 21 days of exceeding threshold',
     govLink: 'https://www.sars.gov.za/types-of-tax/value-added-tax/', source: 'SARS sars.gov.za',
@@ -581,6 +581,7 @@ function buildCards() {
       </div>
       <div class="card-footer">
         <a class="btn-card-primary" href="index.html?country=${c.code}">Check my threshold →</a>
+        <a class="btn-card-secondary" href="${c.guideUrl}">View full guide →</a>
         <a class="btn-card-secondary" href="${c.govLink}" target="_blank" rel="noopener">
           <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
           Official source
