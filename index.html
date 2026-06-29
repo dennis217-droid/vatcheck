@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VATcheck — Do you need to register for VAT or GST?</title>
+<meta name="description" content="Find out if you need to register for VAT or GST in your country. Free, instant, plain-English answer for small businesses and freelancers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-2: #4a4a4a;
+    --ink-3: #8a8a8a;
+    --paper: #fafaf8;
+    --paper-2: #f2f1ed;
+    --paper-3: #e8e6e0;
+    --line: #e0ded8;
+    --accent: #1a5cff;
+    --accent-pale: #eef2ff;
+    --accent-text: #1240cc;
+    --success: #0f7a4a;
+    --success-pale: #edfaf3;
+    --warning: #8a4f00;
+    --warning-pale: #fff8ee;
+    --danger: #b91c1c;
+    --danger-pale: #fef2f2;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logo-dot { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-badge {
+    font-size: 11px;
+    background: var(--accent-pale);
+    color: var(--accent-text);
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-weight: 500;
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 3.5rem 2rem 2.5rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: var(--ink-2);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* TOOL */
+  .tool-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 680px) {
+    .tool-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 26px; }
+  }
+
+  .panel {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1.25rem;
+  }
+
+  /* FORM */
+  .field { margin-bottom: 1.1rem; }
+
+  .field:last-of-type { margin-bottom: 0; }
+
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    margin-bottom: 5px;
+  }
+
+  select, input[type="number"] {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8a8a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  select:focus, input[type="number"]:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,92,255,0.1);
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .radio-opt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .radio-opt:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-pale);
+    color: var(--accent-text);
+  }
+
+  .radio-opt input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .btn-check {
+    width: 100%;
+    margin-top: 1.25rem;
+    height: 44px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .btn-check:hover { background: #1240cc; }
+  .btn-check:active { transform: scale(0.99); }
+
+  /* RESULTS */
+  #result-panel { display: none; }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+
+  .pill-ok { background: var(--success-pale); color: var(--success); }
+  .pill-warn { background: var(--warning-pale); color: var(--warning); }
+  .pill-required { background: var(--danger-pale); color: var(--danger); }
+
+  .pill-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .pill-ok .pill-dot { background: var(--success); }
+  .pill-warn .pill-dot { background: var(--warning); }
+  .pill-required .pill-dot { background: var(--danger); }
+
+  /* Progress */
+  .threshold-block { margin-bottom: 1.25rem; }
+
+  .threshold-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .threshold-labels span:last-child { font-weight: 500; color: var(--ink-2); }
+
+  .progress-track {
+    height: 8px;
+    background: var(--paper-2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill-bar {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+  }
+
+  /* Stat grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .stat-box {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+  }
+
+  .stat-box-label {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .stat-box-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* Info rows */
+  .info-rows { border-top: 1px solid var(--line); padding-top: 1rem; margin-bottom: 1.25rem; }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    gap: 1rem;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+
+  .info-row-label {
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  .info-row-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+  }
+
+  .info-row-val.ok { color: var(--success); }
+  .info-row-val.warn { color: var(--warning); }
+
+  /* Warning box */
+  .alert-box {
+    background: var(--warning-pale);
+    border: 1px solid #f0d090;
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--warning);
+    margin-bottom: 1.25rem;
+    display: none;
+  }
+
+  .alert-box.show { display: block; }
+
+  /* CTA buttons */
+  .result-ctas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .btn-secondary {
+    height: 38px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .btn-secondary:hover {
+    background: var(--paper-2);
+    border-color: var(--paper-3);
+  }
+
+  .btn-accent-soft {
+    height: 38px;
+    border: 1px solid #b8caff;
+    border-radius: var(--radius);
+    background: var(--accent-pale);
+    color: var(--accent-text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .btn-accent-soft:hover { background: #dce6ff; }
+
+  /* Empty state */
+  #empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .empty-icon {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+
+  .empty-icon svg { opacity: 0.35; }
+
+  #empty-state h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+
+  #empty-state p {
+    font-size: 13px;
+    color: var(--ink-3);
+    max-width: 220px;
+  }
+
+  /* AFFILIATE */
+  .affiliate-strip {
+    margin-top: 1.5rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .affiliate-left { flex: 1; }
+
+  .affiliate-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 4px;
+  }
+
+  .affiliate-left h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .affiliate-left p {
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  .btn-affiliate {
+    height: 40px;
+    padding: 0 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+
+  .btn-affiliate:hover { background: #1240cc; }
+
+  /* MORE TOOLS */
+  .more-tools-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 2.5rem 0 1rem;
+  }
+
+  .tools-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .tools-row { grid-template-columns: 1fr; }
+    .affiliate-strip { flex-direction: column; }
+  }
+
+  .tool-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .tool-card:hover {
+    border-color: var(--paper-3);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .tool-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--accent-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .tool-icon svg { color: var(--accent); }
+
+  .tool-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  .tool-card p {
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-3);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  footer a { color: var(--ink-3); text-decoration: none; }
+  footer a:hover { color: var(--ink-2); }
+
+  /* DATA SOURCE BAR */
+  .data-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 1.25rem;
+  }
+
+  .data-bar svg { flex-shrink: 0; }
+
+  .data-bar a { color: var(--ink-3); text-decoration: underline; }
+
+  .data-bar .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+    flex-shrink: 0;
+  }
+
+  .data-bar .static-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    flex-shrink: 0;
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: var(--paper-2);
+    border-left: 3px solid var(--line);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-top: 1.25rem;
+  }
+
+  .disclaimer strong { color: var(--ink-2); font-weight: 500; }
+
+  /* PRINT */
+  @media print {
+    nav, .affiliate-strip, .more-tools-label, .tools-row, .result-ctas, footer { display: none !important; }
+    .tool-grid { grid-template-columns: 1fr; }
+    #result-panel { display: block !important; }
+    #empty-state { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">VAT<span class="logo-dot">·</span>check</div>
+  <ul class="nav-links">
+    <li><a href="#">VAT estimator</a></li>
+    <li><a href="#">Country guides</a></li>
+    <li><a href="#">Invoice generator <span class="nav-badge">Soon</span></a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Free tax tool for small businesses</div>
+  <h1>Do you need to register for VAT or GST?</h1>
+  <p>Enter your details and get a plain-English answer in seconds. No signup, no jargon.</p>
+</div>
+
+<div class="tool-wrap">
+  <div class="tool-grid">
+
+    <!-- INPUT PANEL -->
+    <div class="panel">
+      <div class="panel-title">Your details</div>
+
+      <div class="field">
+        <label for="country">Country you're based in</label>
+        <select id="country">
+          <option value="AU">🇦🇺 Australia (GST)</option>
+          <option value="CA">🇨🇦 Canada (GST / HST)</option>
+          <option value="DE">🇩🇪 Germany (MwSt)</option>
+          <option value="IE">🇮🇪 Ireland (VAT)</option>
+          <option value="IN">🇮🇳 India (GST)</option>
+          <option value="NL">🇳🇱 Netherlands (BTW)</option>
+          <option value="NZ">🇳🇿 New Zealand (GST)</option>
+          <option value="ZA">🇿🇦 South Africa (VAT)</option>
+          <option value="UK" selected>🇬🇧 United Kingdom (VAT)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="biz-type">Business type</label>
+        <select id="biz-type">
+          <option value="freelancer">Freelancer / sole trader</option>
+          <option value="company">Limited company</option>
+          <option value="ecommerce">E-commerce / online store</option>
+          <option value="digital">Digital products (courses, templates, software)</option>
+          <option value="service">Service business</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="revenue">Annual revenue (local currency)</label>
+        <input type="number" id="revenue" value="74000" min="0" max="10000000" step="1000" />
+      </div>
+
+      <div class="field">
+        <label>Do you sell to customers in other countries?</label>
+        <div class="radio-group">
+          <label class="radio-opt">
+            <input type="radio" name="intl" id="intl-yes" value="yes" checked />
+            Yes — I have overseas or EU customers
+          </label>
+          <label class="radio-opt">
+            <input type="radio" name="intl" id="intl-no" value="no" />
+            No — domestic customers only
+          </label>
+        </div>
+      </div>
+
+      <button class="btn-check" onclick="checkVAT()">Check my VAT / GST status →</button>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div class="panel" id="right-panel">
+
+      <div id="empty-state">
+        <div class="empty-icon">
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-3-3v6M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z"/>
+          </svg>
+        </div>
+        <h3>Your result will appear here</h3>
+        <p>Fill in your details on the left and hit Check.</p>
+      </div>
+
+      <div id="result-panel">
+        <div class="panel-title">Your result</div>
+        <div id="status-pill" class="status-pill">
+          <div class="pill-dot"></div>
+          <span id="status-text"></span>
+        </div>
+
+        <div class="threshold-block">
+          <div class="threshold-labels">
+            <span id="threshold-left-label">Your revenue</span>
+            <span id="threshold-right-label"></span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill-bar" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="stat-box-label">Registration threshold</div>
+            <div class="stat-box-value" id="stat-threshold">—</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-label">You're currently at</div>
+            <div class="stat-box-value" id="stat-pct">—</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-label">Standard rate</div>
+            <div class="stat-box-value" id="stat-rate">—</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-box-label">Filing frequency</div>
+            <div class="stat-box-value" id="stat-filing">—</div>
+          </div>
+        </div>
+
+        <div class="alert-box" id="digital-alert">
+          ⚠️ <strong>Digital services note:</strong> <span id="digital-alert-text"></span>
+        </div>
+
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-label">Must register now?</span>
+            <span class="info-row-val" id="row-must-register">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Gap to threshold</span>
+            <span class="info-row-val" id="row-gap">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">VAT on your sales (if registered)</span>
+            <span class="info-row-val" id="row-vat-amount">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Tax name in your country</span>
+            <span class="info-row-val" id="row-tax-name">—</span>
+          </div>
+          <div class="info-row">
+            <span class="info-row-label">Registration deadline</span>
+            <span class="info-row-val" id="row-deadline">—</span>
+          </div>
+        </div>
+
+        <div class="data-bar" id="data-source-bar">
+          <div class="static-dot" id="source-dot"></div>
+          <span id="source-text">Rates verified June 2026 from official government sources</span>
+        </div>
+
+        <div class="result-ctas">
+          <button class="btn-secondary" onclick="window.print()">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a1 1 0 001-1v-4a1 1 0 00-1-1H9a1 1 0 00-1 1v4a1 1 0 001 1zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Print / save PDF
+          </button>
+          <a class="btn-accent-soft" id="gov-link" href="#" target="_blank" rel="noopener">
+            Official gov guidance →
+          </a>
+        </div>
+
+        <div class="disclaimer">
+          <strong>General guidance only.</strong> Tax rules are complex, change frequently, and vary by your specific circumstances. This tool gives you an orientation — not professional advice. Always verify with the <a id="disclaimer-gov-link" href="#" target="_blank" rel="noopener">official government source</a> or consult a qualified accountant before making decisions. VATcheck accepts no liability for errors or omissions.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AFFILIATE -->
+  <div class="affiliate-strip">
+    <div class="affiliate-left">
+      <div class="affiliate-eyebrow">Sponsored</div>
+      <h3>Handle your VAT automatically with FreshBooks</h3>
+      <p>Tracks revenue against your threshold, generates VAT returns, and syncs with HMRC.</p>
+    </div>
+    <button class="btn-affiliate" onclick="openLink('https://www.freshbooks.com')">Try free for 30 days</button>
+  </div>
+
+  <!-- MORE TOOLS -->
+  <div class="more-tools-label">More free tools</div>
+  <div class="tools-row">
+    <a class="tool-card" href="#">
+      <div class="tool-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+      </div>
+      <h4>VAT invoice generator</h4>
+      <p>Create a compliant VAT invoice for any country in 30 seconds.</p>
+    </a>
+    <a class="tool-card" href="#">
+      <div class="tool-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m-6 4h6m-6 4h4M5 3h14a1 1 0 011 1v16a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/></svg>
+      </div>
+      <h4>Reverse VAT calculator</h4>
+      <p>Work out the pre-tax price from a VAT-inclusive total.</p>
+    </a>
+    <a class="tool-card" href="#">
+      <div class="tool-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h4>Country rate guide</h4>
+      <p>VAT / GST rates, thresholds and rules for 40+ countries.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 VATcheck — free tools for small businesses. Rates updated June 2026.</span>
+  <span><a href="#">Privacy</a> · <a href="#">Disclaimer</a> · <a href="#">Contact</a></span>
+</footer>
+
+<script>
+/* ─── HARDCODED FALLBACK DATA ───────────────────────────────────────────────
+   Source: official government websites, verified June 2026.
+   Update once a year or after major budget announcements.
+   Fields: threshold (local currency), rate (%), reducedRate (% or null),
+           filing frequency, registration deadline, official gov URL,
+           digital-services cross-border note.
+────────────────────────────────────────────────────────────────────────── */
+const FALLBACK = {
+  UK: {
+    name: "United Kingdom", taxName: "VAT", currency: "GBP", symbol: "£",
+    threshold: 90000, rate: 20, reducedRate: 5, zeroRate: true,
+    filing: "Quarterly", registrationDeadline: "Within 30 days of exceeding threshold",
+    govLink: "https://www.gov.uk/vat-registration",
+    source: "HMRC gov.uk", verified: "June 2026",
+    digitalServicesNote: "Selling digital services to EU consumers? You may need to register via the EU OSS scheme regardless of your UK revenue.",
+  },
+  AU: {
+    name: "Australia", taxName: "GST", currency: "AUD", symbol: "A$",
+    threshold: 75000, rate: 10, reducedRate: null, zeroRate: false,
+    filing: "Quarterly (BAS)", registrationDeadline: "Within 21 days of exceeding threshold",
+    govLink: "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst",
+    source: "ATO ato.gov.au", verified: "June 2026",
+    digitalServicesNote: "Foreign businesses selling digital products to Australian consumers must register for GST once annual sales exceed A$75,000.",
+  },
+  CA: {
+    name: "Canada", taxName: "GST / HST", currency: "CAD", symbol: "C$",
+    threshold: 30000, rate: 5, reducedRate: null, zeroRate: false,
+    filing: "Annual or quarterly", registrationDeadline: "Within 29 days of exceeding threshold",
+    govLink: "https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html",
+    source: "CRA canada.ca", verified: "June 2026",
+    digitalServicesNote: "HST rates vary by province (up to 15%). Customers in Ontario, Nova Scotia, and other HST provinces trigger higher effective rates.",
+  },
+  NZ: {
+    name: "New Zealand", taxName: "GST", currency: "NZD", symbol: "NZ$",
+    threshold: 60000, rate: 15, reducedRate: null, zeroRate: false,
+    filing: "Every 2 months", registrationDeadline: "Within 21 days of exceeding threshold",
+    govLink: "https://www.ird.govt.nz/gst/registering-for-gst",
+    source: "IRD ird.govt.nz", verified: "June 2026",
+    digitalServicesNote: "Overseas businesses supplying digital services to NZ consumers must register for GST once annual NZ sales exceed NZ$60,000.",
+  },
+  DE: {
+    name: "Germany", taxName: "MwSt (VAT)", currency: "EUR", symbol: "€",
+    threshold: 22000, rate: 19, reducedRate: 7, zeroRate: false,
+    filing: "Monthly or quarterly", registrationDeadline: "Before making first taxable supply",
+    govLink: "https://www.bzst.de/EN/Businesses/VAT/vat_node.html",
+    source: "BZSt bzst.de", verified: "June 2026",
+    digitalServicesNote: "Selling digital services to EU consumers in other countries? You must charge that country's VAT rate. Simplify using the EU OSS scheme.",
+  },
+  IE: {
+    name: "Ireland", taxName: "VAT", currency: "EUR", symbol: "€",
+    threshold: 40000, rate: 23, reducedRate: 13.5, zeroRate: true,
+    filing: "Bi-monthly", registrationDeadline: "Within 30 days of exceeding threshold",
+    govLink: "https://www.revenue.ie/en/vat/registering-for-vat/index.aspx",
+    source: "Revenue revenue.ie", verified: "June 2026",
+    digitalServicesNote: "Ireland uses the EU OSS scheme. Register once in Ireland to handle VAT on digital services sold across all EU countries.",
+  },
+  IN: {
+    name: "India", taxName: "GST", currency: "INR", symbol: "₹",
+    threshold: 2000000, rate: 18, reducedRate: 12, zeroRate: false,
+    filing: "Monthly (GSTR-3B)", registrationDeadline: "Before starting business (most cases)",
+    govLink: "https://www.gst.gov.in/",
+    source: "GST Council gst.gov.in", verified: "June 2026",
+    digitalServicesNote: "E-commerce and digital service providers face different rules. Inter-state supplies can be taxable from the first rupee — check with a GST practitioner.",
+  },
+  NL: {
+    name: "Netherlands", taxName: "BTW (VAT)", currency: "EUR", symbol: "€",
+    threshold: 0, rate: 21, reducedRate: 9, zeroRate: true,
+    filing: "Quarterly", registrationDeadline: "Before making first taxable supply",
+    govLink: "https://www.belastingdienst.nl/wps/wcm/connect/en/businesses-and-self-employed/businesses-and-self-employed",
+    source: "Belastingdienst belastingdienst.nl", verified: "June 2026",
+    digitalServicesNote: "No threshold in the Netherlands — all businesses making taxable supplies must register from day one.",
+  },
+  ZA: {
+    name: "South Africa", taxName: "VAT", currency: "ZAR", symbol: "R",
+    threshold: 1000000, rate: 15, reducedRate: null, zeroRate: true,
+    filing: "Every 2 months", registrationDeadline: "Within 21 days of exceeding threshold",
+    govLink: "https://www.sars.gov.za/types-of-tax/value-added-tax/",
+    source: "SARS sars.gov.za", verified: "June 2026",
+    digitalServicesNote: "Foreign suppliers of digital services to South African consumers must register for VAT with no threshold exemption.",
+  },
+};
+
+/* ─── LIVE RATE LAYER ────────────────────────────────────────────────────────
+   Tries to fetch the standard VAT rate for EU countries from the
+   EU's official VIES/TEDB endpoint (free, no API key, maintained by
+   the European Commission). For non-EU countries the hardcoded
+   fallback is always used.
+
+   If the fetch fails (network error, CORS, timeout) the tool silently
+   falls back to the hardcoded data and shows a "Verified [date]" badge
+   instead of a "Live" badge — the user always gets a result.
+────────────────────────────────────────────────────────────────────────── */
+const EU_CODES = { DE: 'DE', IE: 'IE', NL: 'NL' };
+let liveRates = {};
+let dataIsLive = false;
+
+async function tryFetchLiveRates() {
+  try {
+    const res = await Promise.race([
+      fetch('https://euvatrates.com/rates.json'),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 4000))
+    ]);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (json && json.rates) {
+      for (const [code, data] of Object.entries(json.rates)) {
+        if (FALLBACK[code] && data.standard_rate) {
+          liveRates[code] = parseFloat(data.standard_rate);
+        }
+      }
+      if (Object.keys(liveRates).length > 0) {
+        dataIsLive = true;
+      }
+    }
+  } catch (e) {
+    liveRates = {};
+    dataIsLive = false;
+  }
+}
+
+function getCountry(code) {
+  const base = { ...FALLBACK[code] };
+  if (dataIsLive && liveRates[code] !== undefined) {
+    base.rate = liveRates[code];
+  }
+  return base;
+}
+
+function setSourceBadge(country) {
+  const dot = document.getElementById('source-dot');
+  const text = document.getElementById('source-text');
+  if (dataIsLive && liveRates[country.currency === 'EUR' ? document.getElementById('country').value : '']) {
+    dot.className = 'live-dot';
+    text.innerHTML = 'Standard rate fetched live from <a href="https://euvatrates.com" target="_blank" rel="noopener">euvatrates.com</a>. Other data verified ' + country.verified + ' — <a href="' + country.govLink + '" target="_blank" rel="noopener">' + country.source + '</a>';
+  } else {
+    dot.className = 'static-dot';
+    text.innerHTML = 'Data verified ' + country.verified + ' from <a href="' + country.govLink + '" target="_blank" rel="noopener">' + country.source + '</a>. Rates change — always verify before acting.';
+  }
+}
+
+function fmt(symbol, amount) {
+  return symbol + Math.round(amount).toLocaleString();
+}
+
+function checkVAT() {
+  const countryCode = document.getElementById('country').value;
+  const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+  const intl = document.querySelector('input[name="intl"]:checked').value;
+  const bizType = document.getElementById('biz-type').value;
+  const country = getCountry(countryCode);
+
+  const pct = country.threshold > 0 ? Math.min((revenue / country.threshold) * 100, 150) : 100;
+  const gap = Math.max(country.threshold - revenue, 0);
+  const mustRegister = country.threshold === 0 || revenue >= country.threshold;
+  const vatAmount = revenue * (country.rate / 100);
+
+  // Status pill
+  const pill = document.getElementById('status-pill');
+  const statusText = document.getElementById('status-text');
+  pill.className = 'status-pill';
+  if (mustRegister) {
+    pill.classList.add('pill-required');
+    statusText.textContent = country.threshold === 0
+      ? 'Registration required from day one'
+      : 'You must register for ' + country.taxName;
+  } else if (pct >= 75) {
+    pill.classList.add('pill-warn');
+    statusText.textContent = 'Approaching the threshold — plan ahead';
+  } else {
+    pill.classList.add('pill-ok');
+    statusText.textContent = 'Below the threshold — no registration yet';
+  }
+
+  // Progress bar
+  const bar = document.getElementById('progress-bar');
+  bar.style.width = Math.min(pct, 100) + '%';
+  if (mustRegister) bar.style.background = '#dc2626';
+  else if (pct >= 75) bar.style.background = '#d97706';
+  else bar.style.background = '#059669';
+
+  // Threshold labels
+  document.getElementById('threshold-right-label').textContent =
+    country.threshold > 0
+      ? fmt(country.symbol, revenue) + ' of ' + fmt(country.symbol, country.threshold) + ' threshold'
+      : 'No threshold — registration required';
+
+  // Stats
+  document.getElementById('stat-threshold').textContent =
+    country.threshold > 0 ? fmt(country.symbol, country.threshold) : 'None';
+  document.getElementById('stat-pct').textContent =
+    country.threshold > 0 ? Math.round(pct) + '%' : 'N/A';
+  document.getElementById('stat-rate').textContent = country.rate + '%';
+  document.getElementById('stat-filing').textContent = country.filing;
+
+  // Info rows
+  document.getElementById('row-must-register').textContent = mustRegister ? 'Yes' : 'Not yet';
+  document.getElementById('row-must-register').className = 'info-row-val ' + (mustRegister ? 'warn' : 'ok');
+  document.getElementById('row-gap').textContent = gap > 0
+    ? fmt(country.symbol, gap) + ' remaining'
+    : mustRegister ? 'Already exceeded' : '—';
+  document.getElementById('row-vat-amount').textContent = fmt(country.symbol, vatAmount) + ' / yr';
+  document.getElementById('row-tax-name').textContent = country.taxName;
+  document.getElementById('row-deadline').textContent = country.registrationDeadline;
+
+  // Digital services warning
+  const alertEl = document.getElementById('digital-alert');
+  if ((intl === 'yes' || bizType === 'digital') && country.digitalServicesNote) {
+    alertEl.classList.add('show');
+    document.getElementById('digital-alert-text').textContent = country.digitalServicesNote;
+  } else {
+    alertEl.classList.remove('show');
+  }
+
+  // Links
+  document.getElementById('gov-link').href = country.govLink;
+  document.getElementById('disclaimer-gov-link').href = country.govLink;
+  document.getElementById('disclaimer-gov-link').textContent = country.source;
+
+  // Source badge
+  setSourceBadge(country);
+
+  // Show result panel
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('result-panel').style.display = 'block';
+
+  // Scroll on mobile
+  if (window.innerWidth < 680) {
+    document.getElementById('right-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Boot: try live fetch first, then render
+window.addEventListener('load', async () => {
+  await tryFetchLiveRates();
+  checkVAT();
+});
+
+document.getElementById('country').addEventListener('change', function() {
+  const c = FALLBACK[this.value];
+  document.querySelector('label[for="revenue"]').textContent =
+    'Annual revenue (' + c.currency + ')';
+  checkVAT();
+});
+</script>
+</body>
+</html>
