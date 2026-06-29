@@ -560,6 +560,18 @@
 
   .btn-affiliate:hover { background: #1240cc; }
 
+  /* FOOTER GUIDES */
+  .footer-guides {
+    text-align: center;
+    padding: 1rem 2rem 0;
+    font-size: 12px;
+    max-width: 1160px;
+    margin: 0 auto;
+    line-height: 2;
+  }
+  .footer-guides a { color: var(--ink-3); text-decoration: none; }
+  .footer-guides a:hover { color: var(--accent); }
+
   /* MORE TOOLS */
   .more-tools-label {
     font-size: 11px;
@@ -574,6 +586,30 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+  }
+
+  .country-guide-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0.5rem;
+  }
+
+  .country-guide-pill {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    background: var(--paper);
+    transition: border-color 0.15s, background 0.15s;
+    white-space: nowrap;
+  }
+
+  .country-guide-pill:hover {
+    border-color: var(--accent);
+    background: var(--accent-pale);
   }
 
   @media (max-width: 600px) {
@@ -899,6 +935,19 @@
   </div>
 
   <!-- MORE TOOLS -->
+  <div class="more-tools-label">Country VAT &amp; GST guides</div>
+  <div class="country-guide-grid">
+    <a class="country-guide-pill" href="uk-vat-guide.html">🇬🇧 UK VAT Guide</a>
+    <a class="country-guide-pill" href="australia-gst-guide.html">🇦🇺 Australia GST Guide</a>
+    <a class="country-guide-pill" href="canada-gst-guide.html">🇨🇦 Canada GST Guide</a>
+    <a class="country-guide-pill" href="germany-vat-guide.html">🇩🇪 Germany VAT Guide</a>
+    <a class="country-guide-pill" href="ireland-vat-guide.html">🇮🇪 Ireland VAT Guide</a>
+    <a class="country-guide-pill" href="india-gst-guide.html">🇮🇳 India GST Guide</a>
+    <a class="country-guide-pill" href="netherlands-vat-guide.html">🇳🇱 Netherlands VAT Guide</a>
+    <a class="country-guide-pill" href="new-zealand-gst-guide.html">🇳🇿 New Zealand GST Guide</a>
+    <a class="country-guide-pill" href="south-africa-vat-guide.html">🇿🇦 South Africa VAT Guide</a>
+  </div>
+
   <div class="more-tools-label">More free tools</div>
   <div class="tools-row">
     <a class="tool-card" href="invoice.html">
@@ -925,6 +974,9 @@
   </div>
 </div>
 
+<div class="footer-guides">
+  <a href="uk-vat-guide.html">UK VAT</a> · <a href="australia-gst-guide.html">Australia GST</a> · <a href="canada-gst-guide.html">Canada GST</a> · <a href="germany-vat-guide.html">Germany VAT</a> · <a href="ireland-vat-guide.html">Ireland VAT</a> · <a href="india-gst-guide.html">India GST</a> · <a href="netherlands-vat-guide.html">Netherlands VAT</a> · <a href="new-zealand-gst-guide.html">New Zealand GST</a> · <a href="south-africa-vat-guide.html">South Africa VAT</a>
+</div>
 <footer>
   <span>© 2026 VATchecker — free tools for small businesses. Rates updated June 2026.</span>
   <span><a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></span>
