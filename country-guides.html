@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Country VAT & GST Rate Guide — VATcheck</title>
+<meta name="description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 9 countries. Verified June 2026.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-2: #4a4a4a;
+    --ink-3: #8a8a8a;
+    --paper: #fafaf8;
+    --paper-2: #f2f1ed;
+    --paper-3: #e8e6e0;
+    --line: #e0ded8;
+    --accent: #1a5cff;
+    --accent-pale: #eef2ff;
+    --accent-text: #1240cc;
+    --success: #0f7a4a;
+    --success-pale: #edfaf3;
+    --warning: #8a4f00;
+    --warning-pale: #fff8ee;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .logo-dot { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); font-weight: 500; }
+
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-2);
+    padding: 4px;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 2rem;
+    position: sticky;
+    top: 56px;
+    z-index: 9;
+  }
+
+  .mobile-nav.open { display: flex; }
+
+  .mobile-nav a {
+    font-size: 14px;
+    color: var(--ink-2);
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a.active { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+
+  .hero {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero p { font-size: 15px; color: var(--ink-2); }
+
+  .wrap {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  /* SEARCH + FILTER */
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    height: 40px;
+    padding: 0 14px 0 38px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24' stroke='%238a8a8a' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 12px center;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .search-box:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,92,255,0.1); }
+
+  .filter-btn {
+    height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .filter-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-pale);
+    color: var(--accent-text);
+  }
+
+  /* COUNTRY CARDS */
+  .country-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1rem;
+  }
+
+  .country-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    transition: box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .country-card:hover {
+    border-color: var(--paper-3);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .country-card.hidden { display: none; }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .card-flag { font-size: 26px; line-height: 1; }
+
+  .card-title h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .card-title span {
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+
+  .card-tag {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--accent-pale);
+    color: var(--accent-text);
+    padding: 3px 8px;
+    border-radius: 99px;
+  }
+
+  .card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+
+  .stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .stat-value.big { font-size: 14px; }
+
+  .card-rows { border-top: 1px solid var(--line); padding-top: 0.75rem; }
+
+  .card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px 0;
+    gap: 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+  }
+
+  .card-row:last-child { border-bottom: none; }
+
+  .card-row-label { color: var(--ink-3); flex-shrink: 0; }
+  .card-row-val { color: var(--ink); font-weight: 500; text-align: right; }
+
+  .card-footer {
+    margin-top: 1rem;
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-card-primary {
+    flex: 1;
+    height: 34px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .btn-card-primary:hover { background: #1240cc; }
+
+  .btn-card-secondary {
+    height: 34px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink-2);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background 0.15s;
+  }
+
+  .btn-card-secondary:hover { background: var(--paper-2); }
+
+  .no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--ink-3);
+    display: none;
+  }
+
+  .data-note {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .data-note-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    flex-shrink: 0;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--ink-3);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  footer a { color: var(--ink-3); text-decoration: none; }
+  footer a:hover { color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">VAT<span class="logo-dot">·</span>check</a>
+  <ul class="nav-links">
+    <li><a href="index.html">VAT checker</a></li>
+    <li><a href="country-guides.html" class="active">Country guides</a></li>
+    <li><a href="invoice.html">Invoice generator</a></li>
+    <li><a href="reverse-vat.html">Reverse VAT</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Menu">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">VAT checker</a>
+  <a href="country-guides.html" class="active">Country guides</a>
+  <a href="invoice.html">Invoice generator</a>
+  <a href="reverse-vat.html">Reverse VAT</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Verified June 2026</div>
+  <h1>VAT & GST Country Guide</h1>
+  <p>Rates, thresholds, and registration rules for every supported country.</p>
+</div>
+
+<div class="wrap">
+  <div class="controls">
+    <input class="search-box" type="text" id="search" placeholder="Search countries…" oninput="filterCards()" />
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" data-filter="eu" onclick="setFilter('eu', this)">EU</button>
+    <button class="filter-btn" data-filter="other" onclick="setFilter('other', this)">Non-EU</button>
+  </div>
+
+  <div class="data-note">
+    <div class="data-note-dot"></div>
+    Data verified June 2026 from official government sources. Tax rules change — always verify before acting.
+  </div>
+
+  <div class="country-grid" id="country-grid"></div>
+  <div class="no-results" id="no-results">No countries match your search.</div>
+</div>
+
+<footer>
+  <span>© 2026 VATcheck — free tools for small businesses. Rates updated June 2026.</span>
+  <span><a href="#">Privacy</a> · <a href="#">Disclaimer</a> · <a href="index.html">VAT checker</a></span>
+</footer>
+
+<script>
+const COUNTRIES = [
+  {
+    code: 'GB', flag: '🇬🇧', name: 'United Kingdom', currency: 'GBP', symbol: '£',
+    taxName: 'VAT', region: 'other',
+    threshold: 90000, rate: 20, reducedRate: 5, zeroRate: true,
+    filing: 'Quarterly', deadline: 'Within 30 days of exceeding threshold',
+    govLink: 'https://www.gov.uk/vat-registration', source: 'HMRC gov.uk',
+    notes: 'Zero-rated supplies (food, books, children\'s clothing) count toward the threshold but are charged at 0%. Reduced rate of 5% applies to domestic fuel and energy-saving products.',
+  },
+  {
+    code: 'AU', flag: '🇦🇺', name: 'Australia', currency: 'AUD', symbol: 'A$',
+    taxName: 'GST', region: 'other',
+    threshold: 75000, rate: 10, reducedRate: null, zeroRate: false,
+    filing: 'Quarterly (BAS)', deadline: 'Within 21 days of exceeding threshold',
+    govLink: 'https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst', source: 'ATO ato.gov.au',
+    notes: 'Non-profit organisations have a higher threshold of A$150,000. Taxi drivers and ride-share drivers must register regardless of turnover.',
+  },
+  {
+    code: 'CA', flag: '🇨🇦', name: 'Canada', currency: 'CAD', symbol: 'C$',
+    taxName: 'GST / HST', region: 'other',
+    threshold: 30000, rate: 5, reducedRate: null, zeroRate: false,
+    filing: 'Annual or quarterly', deadline: 'Within 29 days of exceeding threshold',
+    govLink: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses.html', source: 'CRA canada.ca',
+    notes: 'HST combines federal GST with provincial sales tax. Combined HST rates: Ontario 13%, Nova Scotia 15%, New Brunswick 15%, Newfoundland 15%, PEI 15%.',
+  },
+  {
+    code: 'DE', flag: '🇩🇪', name: 'Germany', currency: 'EUR', symbol: '€',
+    taxName: 'MwSt (VAT)', region: 'eu',
+    threshold: 22000, rate: 19, reducedRate: 7, zeroRate: false,
+    filing: 'Monthly or quarterly', deadline: 'Before making first taxable supply',
+    govLink: 'https://www.bzst.de/EN/Businesses/VAT/vat_node.html', source: 'BZSt bzst.de',
+    notes: 'Kleinunternehmerregelung (small business scheme) exempts businesses below €22,000 in the previous year and expected to stay below €50,000 in the current year.',
+  },
+  {
+    code: 'IE', flag: '🇮🇪', name: 'Ireland', currency: 'EUR', symbol: '€',
+    taxName: 'VAT', region: 'eu',
+    threshold: 40000, rate: 23, reducedRate: 13.5, zeroRate: true,
+    filing: 'Bi-monthly', deadline: 'Within 30 days of exceeding threshold',
+    govLink: 'https://www.revenue.ie/en/vat/registering-for-vat/index.aspx', source: 'Revenue revenue.ie',
+    notes: 'Goods threshold is €80,000; services threshold is €40,000. The EU OSS scheme lets Irish businesses file a single return for all EU digital service sales.',
+  },
+  {
+    code: 'IN', flag: '🇮🇳', name: 'India', currency: 'INR', symbol: '₹',
+    taxName: 'GST', region: 'other',
+    threshold: 2000000, rate: 18, reducedRate: 12, zeroRate: false,
+    filing: 'Monthly (GSTR-3B)', deadline: 'Before starting business (most cases)',
+    govLink: 'https://www.gst.gov.in/', source: 'GST Council gst.gov.in',
+    notes: 'Special category states (NE states, Uttarakhand, HP, J&K) have a lower threshold of ₹1,000,000. Inter-state supplies are taxable from rupee one regardless of turnover.',
+  },
+  {
+    code: 'NL', flag: '🇳🇱', name: 'Netherlands', currency: 'EUR', symbol: '€',
+    taxName: 'BTW (VAT)', region: 'eu',
+    threshold: 0, rate: 21, reducedRate: 9, zeroRate: true,
+    filing: 'Quarterly', deadline: 'Before making first taxable supply',
+    govLink: 'https://www.belastingdienst.nl/wps/wcm/connect/en/businesses-and-self-employed/businesses-and-self-employed', source: 'Belastingdienst belastingdienst.nl',
+    notes: 'No threshold — all Dutch businesses making taxable supplies must register from day one. The KOR (kleineondernemersregeling) scheme offers a VAT exemption for businesses with turnover under €20,000.',
+  },
+  {
+    code: 'NZ', flag: '🇳🇿', name: 'New Zealand', currency: 'NZD', symbol: 'NZ$',
+    taxName: 'GST', region: 'other',
+    threshold: 60000, rate: 15, reducedRate: null, zeroRate: false,
+    filing: 'Every 2 months', deadline: 'Within 21 days of exceeding threshold',
+    govLink: 'https://www.ird.govt.nz/gst/registering-for-gst', source: 'IRD ird.govt.nz',
+    notes: 'Non-profit organisations can register voluntarily if their taxable activities exceed NZ$40,000. Overseas businesses supplying digital services must also register at the NZ$60,000 threshold.',
+  },
+  {
+    code: 'ZA', flag: '🇿🇦', name: 'South Africa', currency: 'ZAR', symbol: 'R',
+    taxName: 'VAT', region: 'other',
+    threshold: 1000000, rate: 15, reducedRate: null, zeroRate: true,
+    filing: 'Every 2 months', deadline: 'Within 21 days of exceeding threshold',
+    govLink: 'https://www.sars.gov.za/types-of-tax/value-added-tax/', source: 'SARS sars.gov.za',
+    notes: 'Voluntary registration is allowed once taxable supplies exceed R50,000. Basic foodstuffs, certain farming inputs, and exported goods are zero-rated.',
+  },
+];
+
+let activeFilter = 'all';
+
+function fmt(symbol, amount) {
+  if (amount === 0) return 'None';
+  return symbol + Math.round(amount).toLocaleString();
+}
+
+function buildCards() {
+  const grid = document.getElementById('country-grid');
+  grid.innerHTML = '';
+  COUNTRIES.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'country-card';
+    card.dataset.region = c.region;
+    card.dataset.name = c.name.toLowerCase();
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-flag">${c.flag}</span>
+        <div class="card-title">
+          <h3>${c.name}</h3>
+          <span>${c.currency} · ${c.taxName}</span>
+        </div>
+        <span class="card-tag">${c.region === 'eu' ? 'EU' : c.region === 'other' ? 'Non-EU' : ''}</span>
+      </div>
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-label">Standard rate</div>
+          <div class="stat-value">${c.rate}%</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Reg. threshold</div>
+          <div class="stat-value big">${c.threshold === 0 ? 'None' : c.symbol + Math.round(c.threshold).toLocaleString()}</div>
+        </div>
+        ${c.reducedRate ? `<div class="stat"><div class="stat-label">Reduced rate</div><div class="stat-value">${c.reducedRate}%</div></div>` : ''}
+        ${c.zeroRate ? `<div class="stat"><div class="stat-label">Zero rate</div><div class="stat-value">Yes</div></div>` : ''}
+      </div>
+      <div class="card-rows">
+        <div class="card-row">
+          <span class="card-row-label">Filing frequency</span>
+          <span class="card-row-val">${c.filing}</span>
+        </div>
+        <div class="card-row">
+          <span class="card-row-label">Registration deadline</span>
+          <span class="card-row-val">${c.deadline}</span>
+        </div>
+        <div class="card-row">
+          <span class="card-row-label">Source</span>
+          <span class="card-row-val">${c.source}</span>
+        </div>
+        <div class="card-row" style="display:block;padding:8px 0">
+          <div class="card-row-label" style="margin-bottom:3px">Key rule</div>
+          <div style="font-size:12px;color:var(--ink-2);line-height:1.5">${c.notes}</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a class="btn-card-primary" href="index.html?country=${c.code}">Check my threshold →</a>
+        <a class="btn-card-secondary" href="${c.govLink}" target="_blank" rel="noopener">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Official source
+        </a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function filterCards() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  let visible = 0;
+  document.querySelectorAll('.country-card').forEach(card => {
+    const matchSearch = !q || card.dataset.name.includes(q);
+    const matchFilter = activeFilter === 'all' || card.dataset.region === activeFilter;
+    const show = matchSearch && matchFilter;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function setFilter(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterCards();
+}
+
+buildCards();
+</script>
+</body>
+</html>

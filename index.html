@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VATcheck — Do you need to register for VAT or GST?</title>
 <meta name="description" content="Find out if you need to register for VAT or GST in your country. Free, instant, plain-English answer for small businesses and freelancers.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -61,6 +62,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    text-decoration: none;
   }
 
   .logo-dot { color: var(--accent); }
@@ -79,14 +81,48 @@
   }
 
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); font-weight: 500; }
 
-  .nav-badge {
-    font-size: 11px;
-    background: var(--accent-pale);
-    color: var(--accent-text);
-    padding: 2px 8px;
-    border-radius: 99px;
-    font-weight: 500;
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-2);
+    padding: 4px;
+    border-radius: var(--radius);
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 2rem;
+    gap: 0;
+    position: sticky;
+    top: 56px;
+    z-index: 9;
+  }
+
+  .mobile-nav.open { display: flex; }
+
+  .mobile-nav a {
+    font-size: 14px;
+    color: var(--ink-2);
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    transition: color 0.15s;
+  }
+
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a:hover { color: var(--ink); }
+  .mobile-nav a.active { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
   }
 
   /* HERO */
@@ -647,13 +683,23 @@
 <body>
 
 <nav>
-  <div class="logo">VAT<span class="logo-dot">·</span>check</div>
-  <ul class="nav-links">
-    <li><a href="#">VAT estimator</a></li>
-    <li><a href="#">Country guides</a></li>
-    <li><a href="#">Invoice generator <span class="nav-badge">Soon</span></a></li>
+  <a class="logo" href="index.html" style="text-decoration:none">VAT<span class="logo-dot">·</span>check</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html" class="active">VAT checker</a></li>
+    <li><a href="country-guides.html">Country guides</a></li>
+    <li><a href="invoice.html">Invoice generator</a></li>
+    <li><a href="reverse-vat.html">Reverse VAT</a></li>
   </ul>
+  <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
 </nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html" class="active">VAT checker</a>
+  <a href="country-guides.html">Country guides</a>
+  <a href="invoice.html">Invoice generator</a>
+  <a href="reverse-vat.html">Reverse VAT</a>
+</div>
 
 <div class="hero">
   <div class="hero-eyebrow">Free tax tool for small businesses</div>
@@ -695,8 +741,9 @@
       </div>
 
       <div class="field">
-        <label for="revenue">Annual revenue (local currency)</label>
+        <label for="revenue" id="revenue-label">Annual revenue (<span id="revenue-currency-label">local currency</span>)</label>
         <input type="number" id="revenue" value="74000" min="0" max="10000000" step="1000" />
+        <div style="font-size:12px;color:var(--ink-3);margin-top:5px">Based on the last 12 rolling months, not the tax year.</div>
       </div>
 
       <div class="field">
@@ -711,6 +758,13 @@
             No — domestic customers only
           </label>
         </div>
+      </div>
+
+      <div class="field">
+        <label class="radio-opt" style="cursor:pointer;gap:10px" id="voluntary-label">
+          <input type="checkbox" id="voluntary-reg" onchange="checkVAT()" style="width:16px;height:16px;accent-color:var(--accent);flex-shrink:0" />
+          I want to register voluntarily (below the threshold)
+        </label>
       </div>
 
       <button class="btn-check" onclick="checkVAT()">Check my VAT / GST status →</button>
@@ -816,11 +870,11 @@
   </div>
 
   <!-- AFFILIATE -->
-  <div class="affiliate-strip">
+  <div class="affiliate-strip" id="affiliate-strip">
     <div class="affiliate-left">
       <div class="affiliate-eyebrow">Sponsored</div>
-      <h3>Handle your VAT automatically with FreshBooks</h3>
-      <p>Tracks revenue against your threshold, generates VAT returns, and syncs with HMRC.</p>
+      <h3 id="aff-headline">Handle your VAT automatically with FreshBooks</h3>
+      <p id="aff-copy">Tracks revenue against your threshold, generates returns, and keeps you compliant.</p>
     </div>
     <button class="btn-affiliate" onclick="openLink('https://www.freshbooks.com')">Try free for 30 days</button>
   </div>
@@ -828,26 +882,26 @@
   <!-- MORE TOOLS -->
   <div class="more-tools-label">More free tools</div>
   <div class="tools-row">
-    <a class="tool-card" href="#">
+    <a class="tool-card" href="invoice.html">
       <div class="tool-icon">
         <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
       </div>
       <h4>VAT invoice generator</h4>
       <p>Create a compliant VAT invoice for any country in 30 seconds.</p>
     </a>
-    <a class="tool-card" href="#">
+    <a class="tool-card" href="reverse-vat.html">
       <div class="tool-icon">
         <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m-6 4h6m-6 4h4M5 3h14a1 1 0 011 1v16a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/></svg>
       </div>
       <h4>Reverse VAT calculator</h4>
       <p>Work out the pre-tax price from a VAT-inclusive total.</p>
     </a>
-    <a class="tool-card" href="#">
+    <a class="tool-card" href="country-guides.html">
       <div class="tool-icon">
         <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
       </div>
       <h4>Country rate guide</h4>
-      <p>VAT / GST rates, thresholds and rules for 40+ countries.</p>
+      <p>VAT / GST rates, thresholds and rules for all supported countries.</p>
     </a>
   </div>
 </div>
@@ -986,10 +1040,10 @@ function getCountry(code) {
   return base;
 }
 
-function setSourceBadge(country) {
+function setSourceBadge(country, countryCode) {
   const dot = document.getElementById('source-dot');
   const text = document.getElementById('source-text');
-  if (dataIsLive && liveRates[country.currency === 'EUR' ? document.getElementById('country').value : '']) {
+  if (dataIsLive && liveRates[countryCode] !== undefined) {
     dot.className = 'live-dot';
     text.innerHTML = 'Standard rate fetched live from <a href="https://euvatrates.com" target="_blank" rel="noopener">euvatrates.com</a>. Other data verified ' + country.verified + ' — <a href="' + country.govLink + '" target="_blank" rel="noopener">' + country.source + '</a>';
   } else {
@@ -998,20 +1052,46 @@ function setSourceBadge(country) {
   }
 }
 
+function openLink(url) {
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
 function fmt(symbol, amount) {
   return symbol + Math.round(amount).toLocaleString();
 }
 
+const AFFILIATE_COPY = {
+  UK: { name: 'FreshBooks', copy: 'Tracks revenue against your threshold, generates VAT returns, and syncs with HMRC.' },
+  AU: { name: 'Xero',       copy: 'Tracks GST against your A$75,000 threshold, generates BAS returns, and syncs with the ATO.' },
+  CA: { name: 'FreshBooks', copy: 'Tracks GST/HST against your C$30,000 threshold and generates your CRA returns automatically.' },
+  DE: { name: 'Lexoffice',  copy: 'Verwaltet Ihre Umsatzsteuer automatisch und erstellt Voranmeldungen für das Finanzamt.' },
+  IE: { name: 'FreshBooks', copy: 'Tracks VAT against your €40,000 threshold and prepares returns for Revenue.ie.' },
+  IN: { name: 'Zoho Books', copy: 'Tracks GST thresholds, files GSTR-3B, and syncs with the GST portal automatically.' },
+  NL: { name: 'Moneybird',  copy: 'Beheert uw BTW automatisch en dient aangiften in bij de Belastingdienst.' },
+  NZ: { name: 'Xero',       copy: 'Tracks GST against your NZ$60,000 threshold, generates returns, and syncs with IRD.' },
+  ZA: { name: 'Sage',       copy: 'Tracks VAT against your R1,000,000 threshold and generates returns for SARS.' },
+};
+
+function updateAffiliate(countryCode) {
+  const aff = AFFILIATE_COPY[countryCode] || AFFILIATE_COPY['UK'];
+  document.getElementById('aff-headline').textContent = 'Handle your ' + FALLBACK[countryCode].taxName + ' automatically with ' + aff.name;
+  document.getElementById('aff-copy').textContent = aff.copy;
+}
+
 function checkVAT() {
   const countryCode = document.getElementById('country').value;
-  const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+  const revenueRaw = parseFloat(document.getElementById('revenue').value);
+  const revenue = isNaN(revenueRaw) || revenueRaw < 0 ? 0 : revenueRaw;
   const intl = document.querySelector('input[name="intl"]:checked').value;
   const bizType = document.getElementById('biz-type').value;
+  const voluntary = document.getElementById('voluntary-reg').checked;
   const country = getCountry(countryCode);
 
-  const pct = country.threshold > 0 ? Math.min((revenue / country.threshold) * 100, 150) : 100;
-  const gap = Math.max(country.threshold - revenue, 0);
+  // pct: real percentage, uncapped — used for display
+  const pct = country.threshold > 0 ? (revenue / country.threshold) * 100 : 100;
+  const gap = country.threshold > 0 ? Math.max(country.threshold - revenue, 0) : 0;
   const mustRegister = country.threshold === 0 || revenue >= country.threshold;
+  const effectivelyRegistered = mustRegister || voluntary;
   const vatAmount = revenue * (country.rate / 100);
 
   // Status pill
@@ -1023,6 +1103,9 @@ function checkVAT() {
     statusText.textContent = country.threshold === 0
       ? 'Registration required from day one'
       : 'You must register for ' + country.taxName;
+  } else if (voluntary) {
+    pill.classList.add('pill-warn');
+    statusText.textContent = 'Voluntary registration — you can register below the threshold';
   } else if (pct >= 75) {
     pill.classList.add('pill-warn');
     statusText.textContent = 'Approaching the threshold — plan ahead';
@@ -1031,12 +1114,10 @@ function checkVAT() {
     statusText.textContent = 'Below the threshold — no registration yet';
   }
 
-  // Progress bar
+  // Progress bar — visual capped at 100%, colour reflects status
   const bar = document.getElementById('progress-bar');
   bar.style.width = Math.min(pct, 100) + '%';
-  if (mustRegister) bar.style.background = '#dc2626';
-  else if (pct >= 75) bar.style.background = '#d97706';
-  else bar.style.background = '#059669';
+  bar.style.background = mustRegister ? '#dc2626' : (voluntary || pct >= 75) ? '#d97706' : '#059669';
 
   // Threshold labels
   document.getElementById('threshold-right-label').textContent =
@@ -1044,23 +1125,33 @@ function checkVAT() {
       ? fmt(country.symbol, revenue) + ' of ' + fmt(country.symbol, country.threshold) + ' threshold'
       : 'No threshold — registration required';
 
-  // Stats
+  // Stats — show real pct, clamped display to "100%+" when exceeded
   document.getElementById('stat-threshold').textContent =
     country.threshold > 0 ? fmt(country.symbol, country.threshold) : 'None';
   document.getElementById('stat-pct').textContent =
-    country.threshold > 0 ? Math.round(pct) + '%' : 'N/A';
+    country.threshold === 0 ? 'N/A'
+    : mustRegister && pct > 100 ? Math.round(pct) + '% (exceeded)'
+    : Math.round(pct) + '%';
   document.getElementById('stat-rate').textContent = country.rate + '%';
   document.getElementById('stat-filing').textContent = country.filing;
 
   // Info rows
-  document.getElementById('row-must-register').textContent = mustRegister ? 'Yes' : 'Not yet';
-  document.getElementById('row-must-register').className = 'info-row-val ' + (mustRegister ? 'warn' : 'ok');
-  document.getElementById('row-gap').textContent = gap > 0
-    ? fmt(country.symbol, gap) + ' remaining'
-    : mustRegister ? 'Already exceeded' : '—';
-  document.getElementById('row-vat-amount').textContent = fmt(country.symbol, vatAmount) + ' / yr';
+  document.getElementById('row-must-register').textContent =
+    mustRegister ? 'Yes' : voluntary ? 'Voluntary' : 'Not yet';
+  document.getElementById('row-must-register').className =
+    'info-row-val ' + (mustRegister ? 'warn' : voluntary ? 'warn' : 'ok');
+  document.getElementById('row-gap').textContent =
+    country.threshold === 0 ? 'No threshold applies'
+    : gap > 0 ? fmt(country.symbol, gap) + ' remaining'
+    : 'Threshold exceeded';
+  document.getElementById('row-vat-amount').textContent =
+    effectivelyRegistered ? fmt(country.symbol, vatAmount) + ' / yr' : 'N/A — not registered';
   document.getElementById('row-tax-name').textContent = country.taxName;
   document.getElementById('row-deadline').textContent = country.registrationDeadline;
+
+  // Hide voluntary checkbox when there's no threshold (NL — always required)
+  document.getElementById('voluntary-label').style.display =
+    country.threshold === 0 ? 'none' : 'flex';
 
   // Digital services warning
   const alertEl = document.getElementById('digital-alert');
@@ -1077,7 +1168,10 @@ function checkVAT() {
   document.getElementById('disclaimer-gov-link').textContent = country.source;
 
   // Source badge
-  setSourceBadge(country);
+  setSourceBadge(country, countryCode);
+
+  // Affiliate strip
+  updateAffiliate(countryCode);
 
   // Show result panel
   document.getElementById('empty-state').style.display = 'none';
@@ -1089,16 +1183,25 @@ function checkVAT() {
   }
 }
 
+function updateRevenueLabel(countryCode) {
+  const c = FALLBACK[countryCode];
+  document.getElementById('revenue-currency-label').textContent = c.currency;
+}
+
+function toggleMobileNav() {
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+
 // Boot: try live fetch first, then render
 window.addEventListener('load', async () => {
+  const initialCode = document.getElementById('country').value;
+  updateRevenueLabel(initialCode);
   await tryFetchLiveRates();
   checkVAT();
 });
 
 document.getElementById('country').addEventListener('change', function() {
-  const c = FALLBACK[this.value];
-  document.querySelector('label[for="revenue"]').textContent =
-    'Annual revenue (' + c.currency + ')';
+  updateRevenueLabel(this.value);
   checkVAT();
 });
 </script>
