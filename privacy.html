@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — VATcheck</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0f0f0f;--ink-2:#4a4a4a;--ink-3:#8a8a8a;--paper:#fafaf8;--paper-2:#f2f1ed;--line:#e0ded8;--accent:#1a5cff;--radius:8px;--radius-lg:14px; }
+  [data-theme="dark"] { --ink:#f0f0ee;--ink-2:#b0aea8;--ink-3:#6a6866;--paper:#111110;--paper-2:#1a1918;--line:#2a2826;--accent:#4d7aff; }
+  * { box-sizing:border-box;margin:0;padding:0; }
+  body { font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.7;min-height:100vh; }
+  nav { background:var(--paper);border-bottom:1px solid var(--line);padding:0 2rem;display:flex;align-items:center;height:56px; }
+  .logo { font-family:'Syne',sans-serif;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:6px;text-decoration:none; }
+  .logo-dot { color:var(--accent); }
+  .wrap { max-width:680px;margin:0 auto;padding:3rem 1.5rem 4rem; }
+  h1 { font-family:'Syne',sans-serif;font-size:28px;margin-bottom:0.5rem; }
+  .updated { font-size:13px;color:var(--ink-3);margin-bottom:2.5rem; }
+  h2 { font-size:17px;font-weight:600;margin:2rem 0 0.5rem; }
+  p { color:var(--ink-2);margin-bottom:1rem; }
+  ul { color:var(--ink-2);margin:0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom:0.4rem; }
+  a { color:var(--accent);text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  footer { border-top:1px solid var(--line);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-3);max-width:680px;margin:0 auto; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">VAT<span class="logo-dot">·</span>check</a>
+</nav>
+<div class="wrap">
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated: June 2026</div>
+
+  <h2>What we collect</h2>
+  <p>VATcheck is a client-side tool. The revenue figures, business type, and country you enter are processed entirely in your browser — they are not sent to our servers or stored anywhere except your own device.</p>
+  <p>The only data sent externally is:</p>
+  <ul>
+    <li>A request to <strong>Google Fonts</strong> to load the Inter and Syne typefaces.</li>
+    <li>A request to <strong>euvatrates.com</strong> to fetch the latest EU VAT rates (anonymous, no personal data).</li>
+    <li>For EU VAT number validation: a request to the <strong>European Commission VIES API</strong> containing only the VAT number you submit.</li>
+  </ul>
+
+  <h2>Local storage</h2>
+  <p>The invoice generator saves your draft invoice to your browser's <code>localStorage</code> so you can return to it later. This data never leaves your device. You can clear it at any time by clicking Reset in the invoice generator, or by clearing your browser's site data.</p>
+
+  <h2>Cookies</h2>
+  <p>VATcheck does not use cookies. Your dark mode preference and invoice data are stored in <code>localStorage</code> only.</p>
+
+  <h2>Analytics</h2>
+  <p>We do not currently run any analytics or tracking scripts on this site.</p>
+
+  <h2>Third-party links</h2>
+  <p>This site links to external services including FreshBooks, Xero, Zoho Books, Sage, Moneybird, and Lexoffice. These are affiliate links — we may earn a commission if you sign up. These services have their own privacy policies.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Email <a href="mailto:privacy@vatcheck.example">privacy@vatcheck.example</a>.</p>
+</div>
+<footer>
+  <span>© 2026 VATcheck</span>
+  <span><a href="disclaimer.html">Disclaimer</a> · <a href="index.html">VAT checker</a></span>
+</footer>
+</body>
+</html>

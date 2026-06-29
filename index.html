@@ -6,6 +6,8 @@
 <title>VATcheck — Do you need to register for VAT or GST?</title>
 <meta name="description" content="Find out if you need to register for VAT or GST in your country. Free, instant, plain-English answer for small businesses and freelancers.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<style>ins.adsbygoogle[data-ad-status="unfilled"]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -29,6 +31,49 @@
     --radius: 8px;
     --radius-lg: 14px;
   }
+
+  [data-theme="dark"] {
+    --ink: #f0f0ee;
+    --ink-2: #b0aea8;
+    --ink-3: #6a6866;
+    --paper: #111110;
+    --paper-2: #1a1918;
+    --paper-3: #252320;
+    --line: #2a2826;
+    --accent: #4d7aff;
+    --accent-pale: #1a2340;
+    --accent-text: #7a9aff;
+    --success: #1fa86a;
+    --success-pale: #0a2018;
+    --warning: #cc8a30;
+    --warning-pale: #201508;
+    --danger: #e05555;
+    --danger-pale: #200808;
+  }
+
+  [data-theme="dark"] .panel { background: #1a1918; }
+  [data-theme="dark"] select,
+  [data-theme="dark"] input[type="number"] { background: #1a1918; color: var(--ink); border-color: var(--line); }
+  [data-theme="dark"] .radio-opt { background: #1a1918; }
+  [data-theme="dark"] .stat-box { background: #111110; }
+  [data-theme="dark"] .affiliate-strip { background: #1a1918; }
+  [data-theme="dark"] .tool-card { background: #1a1918; }
+
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -689,6 +734,11 @@
     <li><a href="country-guides.html">Country guides</a></li>
     <li><a href="invoice.html">Invoice generator</a></li>
     <li><a href="reverse-vat.html">Reverse VAT</a></li>
+    <li><a href="vat-validator.html">VAT validator</a></li>
+    <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+      <svg id="theme-icon-sun" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg id="theme-icon-moon" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display:none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
     <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -699,6 +749,7 @@
   <a href="country-guides.html">Country guides</a>
   <a href="invoice.html">Invoice generator</a>
   <a href="reverse-vat.html">Reverse VAT</a>
+  <a href="vat-validator.html">VAT validator</a>
 </div>
 
 <div class="hero">
@@ -851,10 +902,14 @@
           <span id="source-text">Rates verified June 2026 from official government sources</span>
         </div>
 
-        <div class="result-ctas">
+        <div class="result-ctas" style="grid-template-columns:1fr 1fr 1fr">
           <button class="btn-secondary" onclick="window.print()">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a1 1 0 001-1v-4a1 1 0 00-1-1H9a1 1 0 00-1 1v4a1 1 0 001 1zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
             Print / save PDF
+          </button>
+          <button class="btn-secondary" id="share-btn" onclick="shareResult()">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+            Share result
           </button>
           <a class="btn-accent-soft" id="gov-link" href="#" target="_blank" rel="noopener">
             Official gov guidance →
@@ -869,14 +924,15 @@
     </div>
   </div>
 
-  <!-- AFFILIATE -->
-  <div class="affiliate-strip" id="affiliate-strip">
-    <div class="affiliate-left">
-      <div class="affiliate-eyebrow">Sponsored</div>
-      <h3 id="aff-headline">Handle your VAT automatically with FreshBooks</h3>
-      <p id="aff-copy">Tracks revenue against your threshold, generates returns, and keeps you compliant.</p>
-    </div>
-    <button class="btn-affiliate" onclick="openLink('https://www.freshbooks.com')">Try free for 30 days</button>
+  <!-- AD SLOT -->
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
   <!-- MORE TOOLS -->
@@ -908,7 +964,7 @@
 
 <footer>
   <span>© 2026 VATcheck — free tools for small businesses. Rates updated June 2026.</span>
-  <span><a href="#">Privacy</a> · <a href="#">Disclaimer</a> · <a href="#">Contact</a></span>
+  <span><a href="privacy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></span>
 </footer>
 
 <script>
@@ -1061,21 +1117,41 @@ function fmt(symbol, amount) {
 }
 
 const AFFILIATE_COPY = {
-  UK: { name: 'FreshBooks', copy: 'Tracks revenue against your threshold, generates VAT returns, and syncs with HMRC.' },
-  AU: { name: 'Xero',       copy: 'Tracks GST against your A$75,000 threshold, generates BAS returns, and syncs with the ATO.' },
-  CA: { name: 'FreshBooks', copy: 'Tracks GST/HST against your C$30,000 threshold and generates your CRA returns automatically.' },
-  DE: { name: 'Lexoffice',  copy: 'Verwaltet Ihre Umsatzsteuer automatisch und erstellt Voranmeldungen für das Finanzamt.' },
-  IE: { name: 'FreshBooks', copy: 'Tracks VAT against your €40,000 threshold and prepares returns for Revenue.ie.' },
-  IN: { name: 'Zoho Books', copy: 'Tracks GST thresholds, files GSTR-3B, and syncs with the GST portal automatically.' },
-  NL: { name: 'Moneybird',  copy: 'Beheert uw BTW automatisch en dient aangiften in bij de Belastingdienst.' },
-  NZ: { name: 'Xero',       copy: 'Tracks GST against your NZ$60,000 threshold, generates returns, and syncs with IRD.' },
-  ZA: { name: 'Sage',       copy: 'Tracks VAT against your R1,000,000 threshold and generates returns for SARS.' },
+  UK: { name: 'FreshBooks', url: 'https://www.freshbooks.com',       copy: 'Tracks revenue against your threshold, generates VAT returns, and syncs with HMRC.' },
+  AU: { name: 'Xero',       url: 'https://www.xero.com/au/',         copy: 'Tracks GST against your A$75,000 threshold, generates BAS returns, and syncs with the ATO.' },
+  CA: { name: 'FreshBooks', url: 'https://www.freshbooks.com',       copy: 'Tracks GST/HST against your C$30,000 threshold and generates your CRA returns automatically.' },
+  DE: { name: 'Lexoffice',  url: 'https://www.lexoffice.de',         copy: 'Verwaltet Ihre Umsatzsteuer automatisch und erstellt Voranmeldungen für das Finanzamt.' },
+  IE: { name: 'FreshBooks', url: 'https://www.freshbooks.com',       copy: 'Tracks VAT against your €40,000 threshold and prepares returns for Revenue.ie.' },
+  IN: { name: 'Zoho Books', url: 'https://www.zoho.com/books/',      copy: 'Tracks GST thresholds, files GSTR-3B, and syncs with the GST portal automatically.' },
+  NL: { name: 'Moneybird',  url: 'https://www.moneybird.nl',         copy: 'Beheert uw BTW automatisch en dient aangiften in bij de Belastingdienst.' },
+  NZ: { name: 'Xero',       url: 'https://www.xero.com/nz/',         copy: 'Tracks GST against your NZ$60,000 threshold, generates returns, and syncs with IRD.' },
+  ZA: { name: 'Sage',       url: 'https://www.sage.com/en-za/',      copy: 'Tracks VAT against your R1,000,000 threshold and generates returns for SARS.' },
 };
 
 function updateAffiliate(countryCode) {
-  const aff = AFFILIATE_COPY[countryCode] || AFFILIATE_COPY['UK'];
-  document.getElementById('aff-headline').textContent = 'Handle your ' + FALLBACK[countryCode].taxName + ' automatically with ' + aff.name;
-  document.getElementById('aff-copy').textContent = aff.copy;
+  // affiliate strip removed — no-op
+}
+
+function updateURL() {
+  const params = new URLSearchParams({
+    country: document.getElementById('country').value,
+    revenue: document.getElementById('revenue').value,
+    intl: document.querySelector('input[name="intl"]:checked').value,
+    biz: document.getElementById('biz-type').value,
+  });
+  history.replaceState(null, '', '?' + params.toString());
+}
+
+function shareResult() {
+  const url = location.href;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById('share-btn');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = orig, 2000);
+    });
+  }
 }
 
 function checkVAT() {
@@ -1177,6 +1253,9 @@ function checkVAT() {
   document.getElementById('empty-state').style.display = 'none';
   document.getElementById('result-panel').style.display = 'block';
 
+  // Sync URL
+  updateURL();
+
   // Scroll on mobile
   if (window.innerWidth < 680) {
     document.getElementById('right-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1192,10 +1271,51 @@ function toggleMobileNav() {
   document.getElementById('mobile-nav').classList.toggle('open');
 }
 
-// Boot: try live fetch first, then render
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('vatcheck-theme', next);
+  document.getElementById('theme-icon-sun').style.display = isDark ? '' : 'none';
+  document.getElementById('theme-icon-moon').style.display = isDark ? 'none' : '';
+}
+
+// Apply saved/system theme before paint
+(function() {
+  const saved = localStorage.getItem('vatcheck-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if ((saved || (prefersDark ? 'dark' : 'light')) === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.addEventListener('DOMContentLoaded', () => {
+      const sun = document.getElementById('theme-icon-sun');
+      const moon = document.getElementById('theme-icon-moon');
+      if (sun) sun.style.display = 'none';
+      if (moon) moon.style.display = '';
+    });
+  }
+})();
+
+// Boot: read URL params, then fetch live rates, then render
 window.addEventListener('load', async () => {
-  const initialCode = document.getElementById('country').value;
-  updateRevenueLabel(initialCode);
+  const params = new URLSearchParams(location.search);
+  const countryEl = document.getElementById('country');
+  const revenueEl = document.getElementById('revenue');
+  const bizEl = document.getElementById('biz-type');
+
+  if (params.get('country') && FALLBACK[params.get('country')]) {
+    countryEl.value = params.get('country');
+  }
+  if (params.get('revenue')) revenueEl.value = params.get('revenue');
+  if (params.get('biz') && bizEl.querySelector(`option[value="${params.get('biz')}"]`)) {
+    bizEl.value = params.get('biz');
+  }
+  if (params.get('intl') === 'no') {
+    document.getElementById('intl-no').checked = true;
+  } else if (params.get('intl') === 'yes') {
+    document.getElementById('intl-yes').checked = true;
+  }
+
+  updateRevenueLabel(countryEl.value);
   await tryFetchLiveRates();
   checkVAT();
 });

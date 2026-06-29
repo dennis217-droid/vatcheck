@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — VATcheck</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0f0f0f;--ink-2:#4a4a4a;--ink-3:#8a8a8a;--paper:#fafaf8;--paper-2:#f2f1ed;--line:#e0ded8;--accent:#1a5cff;--accent-pale:#eef2ff;--accent-text:#1240cc;--radius:8px;--radius-lg:14px; }
+  [data-theme="dark"] { --ink:#f0f0ee;--ink-2:#b0aea8;--ink-3:#6a6866;--paper:#111110;--paper-2:#1a1918;--line:#2a2826;--accent:#4d7aff;--accent-pale:#1a2340;--accent-text:#7a9aff; }
+  * { box-sizing:border-box;margin:0;padding:0; }
+  body { font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;display:flex;flex-direction:column; }
+  nav { background:var(--paper);border-bottom:1px solid var(--line);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px; }
+  .logo { font-family:'Syne',sans-serif;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:6px;text-decoration:none; }
+  .logo-dot { color:var(--accent); }
+  main { flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center; }
+  .wrap { max-width:420px; }
+  .code { font-family:'Syne',sans-serif;font-size:80px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:1rem; }
+  h1 { font-family:'Syne',sans-serif;font-size:24px;margin-bottom:0.75rem; }
+  p { font-size:15px;color:var(--ink-2);margin-bottom:2rem; }
+  .links { display:flex;flex-wrap:wrap;gap:10px;justify-content:center; }
+  .btn { height:40px;padding:0 20px;border-radius:var(--radius);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;text-decoration:none;display:flex;align-items:center;transition:background 0.15s; }
+  .btn-primary { background:var(--accent);color:#fff;border:none; }
+  .btn-primary:hover { background:#1240cc; }
+  .btn-secondary { background:var(--paper-2);color:var(--ink-2);border:1px solid var(--line); }
+  .btn-secondary:hover { background:var(--paper);border-color:var(--accent);color:var(--accent); }
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">VAT<span class="logo-dot">·</span>check</a>
+</nav>
+<main>
+  <div class="wrap">
+    <div class="code">404</div>
+    <h1>Page not found</h1>
+    <p>The page you're looking for doesn't exist or has been moved.</p>
+    <div class="links">
+      <a class="btn btn-primary" href="index.html">VAT checker</a>
+      <a class="btn btn-secondary" href="invoice.html">Invoice generator</a>
+      <a class="btn btn-secondary" href="country-guides.html">Country guides</a>
+      <a class="btn btn-secondary" href="reverse-vat.html">Reverse VAT</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>
