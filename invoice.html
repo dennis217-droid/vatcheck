@@ -187,7 +187,8 @@
   }
 
   @media (max-width: 900px) {
-    .tool-wrap { grid-template-columns: 1fr; }
+    .tool-wrap { grid-template-columns: minmax(0, 1fr); }
+    .form-panel, .preview-pane { min-width: 0; }
   }
 
   /* FORM PANEL */
@@ -208,6 +209,7 @@
 
   .form-tab {
     flex: 1;
+    min-width: 0;
     padding: 10px 12px;
     font-size: 12px;
     font-weight: 600;
@@ -253,6 +255,7 @@
   textarea,
   select {
     width: 100%;
+    min-width: 0;
     padding: 8px 10px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -692,6 +695,40 @@
     table { width: 100% !important; }
   }
 
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .hero { padding: 2rem 1.25rem 1rem; }
+    .hero h1 { font-size: 24px; }
+    .tool-wrap { padding: 0 1rem 3rem; gap: 1rem; }
+    .form-panel { position: static; top: auto; }
+    .preview-wrap { padding: 1rem; }
+    .invoice-doc { padding: 1.25rem; }
+
+    .line-item {
+      grid-template-columns: 1fr 18px;
+      grid-template-areas: "desc remove" "qty qty" "price price" "rate rate";
+      row-gap: 4px;
+    }
+    .line-item input:nth-child(1) { grid-area: desc; }
+    .line-item input:nth-child(2) { grid-area: qty; }
+    .line-item input:nth-child(3) { grid-area: price; }
+    .line-item input:nth-child(4) { grid-area: rate; }
+    .line-item .btn-remove-item { grid-area: remove; }
+    .line-item input[type="number"] { text-align: left; }
+    .items-header { display: none; }
+
+    .inv-header { flex-direction: column; gap: 1rem; }
+    .inv-meta { text-align: left; }
+    .inv-meta-row { justify-content: flex-start; }
+    .inv-meta-label { text-align: left; }
+    .inv-meta-val { text-align: left; }
+    .inv-parties { grid-template-columns: 1fr; gap: 1.25rem; }
+    .inv-table { display: block; overflow-x: auto; white-space: nowrap; }
+    .inv-totals { align-items: stretch; }
+    .inv-total-row { min-width: 0; }
+    .form-actions { flex-wrap: wrap; }
+  }
+
   /* FOOTER */
   footer {
     border-top: 1px solid var(--line);
@@ -1020,11 +1057,11 @@ function renderItems() {
     row.innerHTML = `
       <input type="text" placeholder="Description" value="${escHtml(item.desc)}"
         oninput="updateItem(${item.id}, 'desc', this.value)" />
-      <input type="number" min="0" step="1" value="${item.qty}"
+      <input type="number" min="0" step="1" value="${item.qty}" placeholder="Qty"
         oninput="updateItem(${item.id}, 'qty', this.value)" />
-      <input type="number" min="0" step="0.01" value="${item.price}"
+      <input type="number" min="0" step="0.01" value="${item.price}" placeholder="Unit price"
         oninput="updateItem(${item.id}, 'price', this.value)" />
-      <input type="number" min="0" step="0.5" value="${item.vatRate}" class="vat-rate-select"
+      <input type="number" min="0" step="0.5" value="${item.vatRate}" class="vat-rate-select" placeholder="VAT %"
         oninput="updateItem(${item.id}, 'vatRate', this.value)" />
       <button class="btn-remove-item" onclick="removeItem(${item.id})" title="Remove">×</button>
     `;
