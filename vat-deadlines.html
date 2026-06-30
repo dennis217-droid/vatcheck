@@ -403,16 +403,83 @@
 </footer>
 
 <script>
+// lag(periodEnd, freq) returns the due date for a given period end + filing
+// frequency. Most countries use the same offset regardless of frequency, but
+// several (AU, CA, DE, IN) have a materially different rule for at least one
+// frequency, so those are branched explicitly below.
 const COUNTRY_RULES = {
-  UK: { defaultFreq: 'quarterly', lag: (d) => { d = addMonths(d, 1); d.setDate(d.getDate() + 7); return d; } },
-  AU: { defaultFreq: 'quarterly', lag: (d) => addDays(d, 28) },
-  CA: { defaultFreq: 'quarterly', lag: (d) => addMonths(d, 1) },
-  DE: { defaultFreq: 'monthly',   lag: (d) => addDays(d, 10) },
-  IE: { defaultFreq: 'bimonthly', lag: (d) => addDays(d, 19) },
-  IN: { defaultFreq: 'monthly',   lag: (d) => addDays(d, 20) },
-  NL: { defaultFreq: 'quarterly', lag: (d) => lastDayOfMonth(addMonths(d, 1)) },
-  NZ: { defaultFreq: 'bimonthly', lag: (d) => addDays(d, 28) },
-  ZA: { defaultFreq: 'bimonthly', lag: (d) => { d = addMonths(d, 1); d.setDate(25); return d; } },
+  UK: {
+    defaultFreq: 'quarterly',
+    // VAT return + payment due 1 calendar month + 7 days after period end,
+    // regardless of filing frequency.
+    lag: (d) => { d = addMonths(d, 1); d.setDate(d.getDate() + 7); return d; },
+  },
+  AU: {
+    defaultFreq: 'quarterly',
+    // Monthly BAS: due on the 21st of the following month.
+    // Quarterly BAS: due 28 days after quarter end (Q2 Oct-Dec is a known
+    // exception, extended to 28 Feb — not modelled here).
+    // Annual GST (small voluntary payers): due with the income tax return,
+    // approximated here as 3 months after period end.
+    lag: (d, freq) => {
+      if (freq === 'monthly') { d = addMonths(d, 1); d.setDate(21); return d; }
+      if (freq === 'annual') return addMonths(d, 3);
+      return addDays(d, 28);
+    },
+  },
+  CA: {
+    defaultFreq: 'quarterly',
+    // Monthly/quarterly: due 1 month after period end.
+    // Annual: most filers must file 3 months after fiscal year-end (sole
+    // proprietors with a Dec 31 year-end get an extended June 15 filing
+    // deadline, but still owe payment by Apr 30 — not modelled here).
+    lag: (d, freq) => freq === 'annual' ? addMonths(d, 3) : addMonths(d, 1),
+  },
+  DE: {
+    defaultFreq: 'monthly',
+    // Monthly/quarterly Umsatzsteuer-Voranmeldung: due 10 days after period end.
+    // Annual return (Steuererklärung): due 31 July of the following year.
+    lag: (d, freq) => {
+      if (freq === 'annual') return new Date(d.getFullYear() + 1, 6, 31);
+      return addDays(d, 10);
+    },
+  },
+  IE: {
+    defaultFreq: 'bimonthly',
+    // Standard VAT3 return due on the 19th of the month after the period
+    // (23rd for ROS-extended filers — not modelled here), regardless of
+    // whether you're on monthly, bi-monthly, or annual filing.
+    lag: (d) => addDays(d, 19),
+  },
+  IN: {
+    defaultFreq: 'monthly',
+    // Monthly GSTR-3B: due on the 20th of the following month.
+    // Quarterly QRMP scheme: due on the 22nd or 24th depending on state —
+    // approximated here as the 22nd.
+    lag: (d, freq) => {
+      d = addMonths(d, 1);
+      d.setDate(freq === 'quarterly' ? 22 : 20);
+      return d;
+    },
+  },
+  NL: {
+    defaultFreq: 'quarterly',
+    // Due by the end of the month following the period, regardless of
+    // filing frequency.
+    lag: (d) => lastDayOfMonth(addMonths(d, 1)),
+  },
+  NZ: {
+    defaultFreq: 'bimonthly',
+    // Due on the 28th of the month following the period (the Nov period's
+    // due date is pushed to 15 Jan — not modelled here).
+    lag: (d) => { d = addMonths(d, 1); d.setDate(28); return d; },
+  },
+  ZA: {
+    defaultFreq: 'bimonthly',
+    // Category A/B vendors: due on the 25th of the month following the
+    // period (eFiling sometimes extends this a few more days).
+    lag: (d) => { d = addMonths(d, 1); d.setDate(25); return d; },
+  },
 };
 
 const FREQ_MONTHS = { monthly: 1, bimonthly: 2, quarterly: 3, biannual: 6, annual: 12 };
@@ -495,11 +562,11 @@ function calculate() {
   const months = FREQ_MONTHS[freq];
 
   // Step forward through periods until the due date is in the future.
-  let dueDate = rule.lag(new Date(periodEnd));
+  let dueDate = rule.lag(new Date(periodEnd), freq);
   const now = new Date();
   while (dueDate < now) {
     periodEnd = lastDayOfMonth(addMonths(periodEnd, months));
-    dueDate = rule.lag(new Date(periodEnd));
+    dueDate = rule.lag(new Date(periodEnd), freq);
   }
 
   document.getElementById('period-end-text').textContent = fmtDateShort(periodEnd);
@@ -514,7 +581,7 @@ function calculate() {
   list.innerHTML = '';
   let pEnd = periodEnd;
   for (let i = 0; i < 4; i++) {
-    const due = rule.lag(new Date(pEnd));
+    const due = rule.lag(new Date(pEnd), freq);
     const row = document.createElement('div');
     row.className = 'upcoming-row' + (i === 0 ? ' is-next' : '');
     row.innerHTML = `
