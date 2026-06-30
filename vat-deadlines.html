@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAT/GST Return Deadline Calendar & Countdown — VATchecker</title>
+<meta name="description" content="Work out your next VAT or GST return due date and count down to it. Free calendar for UK, EU, Australia, Canada, India, NZ and South Africa.">
+<link rel="canonical" href="https://vatchecker.org/vat-deadlines.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatchecker.org/vat-deadlines.html">
+<meta property="og:title" content="VAT/GST Return Deadline Calendar & Countdown — VATchecker">
+<meta property="og:description" content="Work out your next VAT or GST return due date and count down to it. Free calendar for UK, EU, Australia, Canada, India, NZ and South Africa.">
+<meta property="og:site_name" content="VATchecker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VAT/GST Return Deadline Calendar & Countdown — VATchecker">
+<meta name="twitter:description" content="Work out your next VAT or GST return due date and count down to it. Free calendar for UK, EU, Australia, Canada, India, NZ and South Africa.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script async src="https://fundingchoicesmessages.google.com/i/pub-7944546027612121?ers=1"></script>
+<script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7944546027612121" crossorigin="anonymous"></script>
+<style>.ad-slot{overflow:hidden;max-height:0;transition:max-height .3s ease}.ad-slot.ad-filled{max-height:400px}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=optional" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --ink-2: #4a4a4a;
+    --ink-3: #8a8a8a;
+    --paper: #fafaf8;
+    --paper-2: #f2f1ed;
+    --paper-3: #e8e6e0;
+    --line: #e0ded8;
+    --accent: #1a5cff;
+    --accent-pale: #eef2ff;
+    --accent-text: #1240cc;
+    --success: #0f7a4a;
+    --success-pale: #edfaf3;
+    --warning: #8a4f00;
+    --warning-pale: #fff8ee;
+    --danger: #b91c1c;
+    --danger-pale: #fef2f2;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .logo-dot { color: var(--accent); }
+
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--ink-2); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); font-weight: 500; }
+
+  .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--ink-2); padding: 4px; }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 0.75rem 2rem;
+    position: sticky;
+    top: 56px;
+    z-index: 9;
+  }
+
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { font-size: 14px; color: var(--ink-2); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a.active { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+
+  .hero { text-align: center; padding: 3rem 2rem 2rem; max-width: 680px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
+  .hero h1 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 32px; line-height: 1.15; margin-bottom: 0.75rem; }
+  .hero p { font-size: 15px; color: var(--ink-2); }
+
+  @media (max-width: 680px) {
+    .hero h1 { font-size: 26px; }
+    .tool-grid { grid-template-columns: 1fr; }
+  }
+
+  .tool-wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; }
+  .panel-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.25rem; }
+
+  .field { margin-bottom: 1.1rem; }
+  .field:last-of-type { margin-bottom: 0; }
+
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--ink-2); margin-bottom: 5px; }
+
+  select, input[type="date"] {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transition: border-color 0.15s;
+    cursor: pointer;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a8a8a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+  }
+
+  select:focus, input[type="date"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,92,255,0.1); }
+
+  .field-hint { font-size: 12px; color: var(--ink-3); margin-top: 5px; }
+
+  /* COUNTDOWN */
+  .countdown-card {
+    background: var(--accent-pale);
+    border: 1px solid #c7d6ff;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .countdown-label { font-size: 12px; font-weight: 600; color: var(--accent-text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+
+  .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 0.75rem; }
+
+  .countdown-unit { background: #fff; border-radius: var(--radius); padding: 10px 4px; }
+  .countdown-num { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 26px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .countdown-unit-label { font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
+
+  .countdown-due { font-size: 13px; color: var(--ink-2); }
+  .countdown-due strong { color: var(--ink); }
+
+  .countdown-card.overdue { background: var(--danger-pale); border-color: #f3b8b8; }
+  .countdown-card.overdue .countdown-label { color: var(--danger); }
+  .countdown-card.overdue .countdown-num { color: var(--danger); }
+
+  .countdown-card.soon { background: var(--warning-pale); border-color: #f0d090; }
+  .countdown-card.soon .countdown-label { color: var(--warning); }
+  .countdown-card.soon .countdown-num { color: var(--warning); }
+
+  /* UPCOMING TABLE */
+  .upcoming-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.75rem; }
+
+  .upcoming-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+
+  .upcoming-row:last-child { border-bottom: none; }
+  .upcoming-period { color: var(--ink-3); }
+  .upcoming-due { font-weight: 600; color: var(--ink); }
+  .upcoming-row.is-next .upcoming-due { color: var(--accent); }
+
+  .disclaimer {
+    background: var(--paper-2);
+    border-left: 3px solid var(--line);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-top: 1.25rem;
+  }
+
+  /* MORE TOOLS */
+  .more-tools-label { font-size: 11px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin: 2.5rem 0 1rem; }
+  .tools-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 600px) { .tools-row { grid-template-columns: 1fr; } }
+
+  .tool-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; text-decoration: none; display: block; transition: border-color 0.15s, box-shadow 0.15s; }
+  .tool-card:hover { border-color: var(--paper-3); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .tool-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-pale); display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .tool-icon svg { color: var(--accent); }
+  .tool-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+  .tool-card p { font-size: 12px; color: var(--ink-3); line-height: 1.5; }
+
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-3); max-width: 900px; margin: 0 auto; flex-wrap: wrap; gap: 0.5rem; }
+  footer a { color: var(--ink-3); text-decoration: none; }
+  footer a:hover { color: var(--ink-2); }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When is my VAT or GST return due?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on your country and filing frequency. Most VAT/GST returns are due a fixed number of days or weeks after the end of your reporting period — for example, UK VAT returns are due one calendar month and 7 days after the period ends. Use the calculator above to estimate your next due date." }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I file my VAT/GST return late?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most tax authorities charge a late filing penalty and interest on any tax paid late, even if you file on time but pay late. Penalties vary by country and by how late the return is — check with your local tax authority for exact amounts." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can my VAT filing periods be different from the calendar quarter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Many tax authorities assign staggered VAT periods (e.g. periods ending Jan/Apr/Jul/Oct instead of Mar/Jun/Sep/Dec) depending on when you registered. Always check your actual period dates on your tax authority's online portal or registration certificate." }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">VAT<span class="logo-dot">·</span>checker</a>
+  <ul class="nav-links">
+    <li><a href="index.html">VAT checker</a></li>
+    <li><a href="country-guides.html">Country guides</a></li>
+    <li><a href="invoice.html">Invoice generator</a></li>
+    <li><a href="reverse-vat.html">Reverse VAT</a></li>
+    <li><a href="vat-validator.html">VAT validator</a></li>
+    <li><a href="vat-deadlines.html" class="active">Deadlines</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Menu">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">VAT checker</a>
+  <a href="country-guides.html">Country guides</a>
+  <a href="invoice.html">Invoice generator</a>
+  <a href="reverse-vat.html">Reverse VAT</a>
+  <a href="vat-validator.html">VAT validator</a>
+  <a href="vat-deadlines.html" class="active">Deadlines</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Free calculator</div>
+  <h1>VAT/GST Return Deadline Calendar</h1>
+  <p>Work out your next return due date and count down to it — for 9 countries.</p>
+</div>
+
+<div class="ad-slot" style="max-width:900px;margin:0 auto 1.5rem;padding:0 1.5rem">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-7944546027612121"
+       data-ad-slot="3179524261"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <script>
+    (function(){
+      var slot = document.currentScript.closest('.ad-slot');
+      var ins = slot.querySelector('ins.adsbygoogle');
+      var mo = new MutationObserver(function(){
+        var status = ins.getAttribute('data-ad-status');
+        if (status === 'filled') { slot.classList.add('ad-filled'); mo.disconnect(); }
+        else if (status) { mo.disconnect(); }
+      });
+      mo.observe(ins, {attributes:true, attributeFilter:['data-ad-status']});
+    })();
+  </script>
+</div>
+
+<div class="tool-wrap">
+  <div class="tool-grid">
+
+    <!-- INPUT PANEL -->
+    <div class="panel">
+      <div class="panel-title">Your filing details</div>
+
+      <div class="field">
+        <label for="country">Country</label>
+        <select id="country" onchange="onCountryChange()">
+          <option value="UK">🇬🇧 United Kingdom — VAT</option>
+          <option value="AU">🇦🇺 Australia — GST (BAS)</option>
+          <option value="CA">🇨🇦 Canada — GST/HST</option>
+          <option value="DE">🇩🇪 Germany — MwSt (USt-Voranmeldung)</option>
+          <option value="IE">🇮🇪 Ireland — VAT</option>
+          <option value="IN">🇮🇳 India — GST (GSTR-3B)</option>
+          <option value="NL">🇳🇱 Netherlands — BTW</option>
+          <option value="NZ">🇳🇿 New Zealand — GST</option>
+          <option value="ZA">🇿🇦 South Africa — VAT</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="frequency">Filing frequency</label>
+        <select id="frequency" onchange="onFrequencyChange()">
+          <option value="monthly">Monthly</option>
+          <option value="bimonthly">Every 2 months</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="biannual">Every 6 months</option>
+          <option value="annual">Annually</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="period-end">Your current/next period end date</label>
+        <input type="date" id="period-end" onchange="calculate()" />
+        <div class="field-hint">Defaults to a calendar-aligned guess. Check your tax authority portal and adjust if your periods are staggered.</div>
+      </div>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div class="panel">
+      <div class="panel-title">Next return due</div>
+
+      <div class="countdown-card" id="countdown-card">
+        <div class="countdown-label" id="countdown-label">Due in</div>
+        <div class="countdown-grid">
+          <div class="countdown-unit"><div class="countdown-num" id="cd-days">--</div><div class="countdown-unit-label">Days</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-unit-label">Hours</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-unit-label">Mins</div></div>
+          <div class="countdown-unit"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-unit-label">Secs</div></div>
+        </div>
+        <div class="countdown-due">Due <strong id="due-date-text">—</strong> for the period ending <strong id="period-end-text">—</strong></div>
+      </div>
+
+      <div class="upcoming-title">Upcoming deadlines</div>
+      <div id="upcoming-list"></div>
+
+      <div class="disclaimer">
+        <strong>Estimate only.</strong> Due dates are calculated from standard national filing rules and your period end date — they don't account for staggered registration periods, public holiday shifts, or category-specific rules. Always confirm your exact due date on your tax authority's online portal.
+      </div>
+    </div>
+  </div>
+
+  <!-- MORE TOOLS -->
+  <div class="more-tools-label">More free tools</div>
+  <div class="tools-row">
+    <a class="tool-card" href="index.html">
+      <div class="tool-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      </div>
+      <h4>VAT registration checker</h4>
+      <p>Do you need to register for VAT or GST in your country?</p>
+    </a>
+    <a class="tool-card" href="invoice.html">
+      <div class="tool-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+      </div>
+      <h4>VAT invoice generator</h4>
+      <p>Create a compliant VAT invoice for any country in 30 seconds.</p>
+    </a>
+    <a class="tool-card" href="reverse-vat.html">
+      <div class="tool-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m-6 4h6m-6 4h4M5 3h14a1 1 0 011 1v16a1 1 0 01-1 1H5a1 1 0 01-1-1V4a1 1 0 011-1z"/></svg>
+      </div>
+      <h4>Reverse VAT calculator</h4>
+      <p>Work out the pre-tax price from a VAT-inclusive total.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 VATchecker — free tools for small businesses.</span>
+  <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></span>
+</footer>
+
+<script>
+const COUNTRY_RULES = {
+  UK: { defaultFreq: 'quarterly', lag: (d) => { d = addMonths(d, 1); d.setDate(d.getDate() + 7); return d; } },
+  AU: { defaultFreq: 'quarterly', lag: (d) => addDays(d, 28) },
+  CA: { defaultFreq: 'quarterly', lag: (d) => addMonths(d, 1) },
+  DE: { defaultFreq: 'monthly',   lag: (d) => addDays(d, 10) },
+  IE: { defaultFreq: 'bimonthly', lag: (d) => addDays(d, 19) },
+  IN: { defaultFreq: 'monthly',   lag: (d) => addDays(d, 20) },
+  NL: { defaultFreq: 'quarterly', lag: (d) => lastDayOfMonth(addMonths(d, 1)) },
+  NZ: { defaultFreq: 'bimonthly', lag: (d) => addDays(d, 28) },
+  ZA: { defaultFreq: 'bimonthly', lag: (d) => { d = addMonths(d, 1); d.setDate(25); return d; } },
+};
+
+const FREQ_MONTHS = { monthly: 1, bimonthly: 2, quarterly: 3, biannual: 6, annual: 12 };
+
+function addDays(date, n) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+function addMonths(date, n) {
+  const d = new Date(date);
+  const day = d.getDate();
+  d.setDate(1);
+  d.setMonth(d.getMonth() + n);
+  const lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  d.setDate(Math.min(day, lastDay));
+  return d;
+}
+
+function lastDayOfMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+}
+
+function isoDate(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function fmtDate(d) {
+  return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+function fmtDateShort(d) {
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+// Find the next calendar-aligned period end (last day of a month) on or before today,
+// for the given frequency, anchored to December (so periods always land on
+// Dec, or Dec/Jun for biannual, or Mar/Jun/Sep/Dec for quarterly, etc.)
+function guessNextPeriodEnd(freq) {
+  const months = FREQ_MONTHS[freq];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  // Walk forward from the start of this year in `months`-month steps until we
+  // find a period end >= today.
+  let cursor = new Date(today.getFullYear() - 1, 11, 31); // last Dec 31
+  while (cursor < today) {
+    cursor = lastDayOfMonth(addMonths(cursor, months));
+  }
+  return cursor;
+}
+
+function onCountryChange() {
+  const code = document.getElementById('country').value;
+  const rule = COUNTRY_RULES[code];
+  document.getElementById('frequency').value = rule.defaultFreq;
+  onFrequencyChange();
+}
+
+function onFrequencyChange() {
+  const freq = document.getElementById('frequency').value;
+  const guess = guessNextPeriodEnd(freq);
+  document.getElementById('period-end').value = isoDate(guess);
+  calculate();
+}
+
+let countdownTimer = null;
+
+function calculate() {
+  const code = document.getElementById('country').value;
+  const freq = document.getElementById('frequency').value;
+  const rule = COUNTRY_RULES[code];
+  const periodEndInput = document.getElementById('period-end').value;
+  if (!periodEndInput) return;
+
+  let periodEnd = new Date(periodEndInput + 'T00:00:00');
+  const months = FREQ_MONTHS[freq];
+
+  // Step forward through periods until the due date is in the future.
+  let dueDate = rule.lag(new Date(periodEnd));
+  const now = new Date();
+  while (dueDate < now) {
+    periodEnd = lastDayOfMonth(addMonths(periodEnd, months));
+    dueDate = rule.lag(new Date(periodEnd));
+  }
+
+  document.getElementById('period-end-text').textContent = fmtDateShort(periodEnd);
+  document.getElementById('due-date-text').textContent = fmtDate(dueDate);
+
+  if (countdownTimer) clearInterval(countdownTimer);
+  updateCountdown(dueDate);
+  countdownTimer = setInterval(() => updateCountdown(dueDate), 1000);
+
+  // Upcoming deadlines list
+  const list = document.getElementById('upcoming-list');
+  list.innerHTML = '';
+  let pEnd = periodEnd;
+  for (let i = 0; i < 4; i++) {
+    const due = rule.lag(new Date(pEnd));
+    const row = document.createElement('div');
+    row.className = 'upcoming-row' + (i === 0 ? ' is-next' : '');
+    row.innerHTML = `
+      <span class="upcoming-period">Period ending ${fmtDateShort(pEnd)}</span>
+      <span class="upcoming-due">${fmtDateShort(due)}</span>
+    `;
+    list.appendChild(row);
+    pEnd = lastDayOfMonth(addMonths(pEnd, months));
+  }
+}
+
+function updateCountdown(dueDate) {
+  const now = new Date();
+  const diffMs = dueDate - now;
+  const card = document.getElementById('countdown-card');
+  const label = document.getElementById('countdown-label');
+
+  if (diffMs <= 0) {
+    card.className = 'countdown-card overdue';
+    label.textContent = 'Overdue';
+    document.getElementById('cd-days').textContent = '0';
+    document.getElementById('cd-hours').textContent = '0';
+    document.getElementById('cd-mins').textContent = '0';
+    document.getElementById('cd-secs').textContent = '0';
+    return;
+  }
+
+  const days = Math.floor(diffMs / 86400000);
+  const hours = Math.floor((diffMs % 86400000) / 3600000);
+  const mins = Math.floor((diffMs % 3600000) / 60000);
+  const secs = Math.floor((diffMs % 60000) / 1000);
+
+  card.className = days <= 7 ? 'countdown-card soon' : 'countdown-card';
+  label.textContent = 'Due in';
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = hours;
+  document.getElementById('cd-mins').textContent = mins;
+  document.getElementById('cd-secs').textContent = secs;
+}
+
+// Boot
+window.addEventListener('DOMContentLoaded', () => {
+  onCountryChange();
+});
+</script>
+</body>
+</html>
