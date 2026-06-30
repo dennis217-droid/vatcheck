@@ -914,6 +914,7 @@
           <option value="ZA">🇿🇦 South Africa — ZAR (R)</option>
         </select>
       </div>
+      <div id="compliance-note" style="display:none;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:10px 12px;font-size:12px;line-height:1.5;color:var(--ink-2);margin-bottom:1rem"></div>
       <div class="field">
         <label>Default VAT rate (%)</label>
         <input type="number" id="s-default-vat" value="20" min="0" max="100" step="0.5" oninput="render()" />
@@ -1303,9 +1304,29 @@ function switchTab(name, btn) {
   btn.classList.add('active');
 }
 
+const COMPLIANCE_NOTES = {
+  AU: "Tax invoices for sales of A$1,000 or more must also show the buyer's identity or ABN.",
+  NZ: "Taxable supply information for sales of NZ$1,000 or more must also show the buyer's name and address.",
+  IN: "GST tax invoices must include the HSN/SAC code for each item (add it to the item description) and show CGST + SGST separately for in-state sales, or IGST for inter-state sales — this generator shows a single combined GST line, so split it manually before issuing.",
+  ZA: "Full tax invoices for sales of R5,000 or more must also show the buyer's name, address, and VAT number if they are a registered vendor.",
+  CA: "Invoices for C$500 or more must also show the buyer's name and address, and clearly indicate the tax rate applied to each item if rates differ.",
+};
+
+function updateComplianceNote(countryCode) {
+  const note = document.getElementById('compliance-note');
+  const text = COMPLIANCE_NOTES[countryCode];
+  if (text) {
+    note.textContent = '⚠ ' + text;
+    note.style.display = 'block';
+  } else {
+    note.style.display = 'none';
+  }
+}
+
 function onCountryChange() {
   const country = getCountry();
   document.getElementById('s-default-vat').value = country.defaultRate;
+  updateComplianceNote(document.getElementById('s-country').value);
   saveToStorage();
   render();
 }
@@ -1482,6 +1503,7 @@ window.addEventListener('DOMContentLoaded', () => {
     addItem('Web design services', 1, 1200, 20);
     addItem('Monthly hosting', 3, 25, 20);
   }
+  updateComplianceNote(document.getElementById('s-country').value);
   render();
 });
 </script>
