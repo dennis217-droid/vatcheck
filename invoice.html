@@ -988,15 +988,15 @@
 
 <script>
 const COUNTRIES = {
-  UK: { name: "United Kingdom", taxName: "VAT",     currency: "GBP", symbol: "£",   defaultRate: 20 },
-  AU: { name: "Australia",      taxName: "GST",     currency: "AUD", symbol: "A$",  defaultRate: 10 },
-  CA: { name: "Canada",         taxName: "GST/HST", currency: "CAD", symbol: "C$",  defaultRate: 5  },
-  DE: { name: "Germany",        taxName: "MwSt",    currency: "EUR", symbol: "€",   defaultRate: 19 },
-  IE: { name: "Ireland",        taxName: "VAT",     currency: "EUR", symbol: "€",   defaultRate: 23 },
-  IN: { name: "India",          taxName: "GST",     currency: "INR", symbol: "₹",   defaultRate: 18 },
-  NL: { name: "Netherlands",    taxName: "BTW",     currency: "EUR", symbol: "€",   defaultRate: 21 },
-  NZ: { name: "New Zealand",    taxName: "GST",     currency: "NZD", symbol: "NZ$", defaultRate: 15 },
-  ZA: { name: "South Africa",   taxName: "VAT",     currency: "ZAR", symbol: "R",   defaultRate: 15 },
+  UK: { name: "United Kingdom", taxName: "VAT",     currency: "GBP", symbol: "£",   defaultRate: 20, invoiceLabel: "VAT Invoice" },
+  AU: { name: "Australia",      taxName: "GST",     currency: "AUD", symbol: "A$",  defaultRate: 10, invoiceLabel: "Tax Invoice" },
+  CA: { name: "Canada",         taxName: "GST/HST", currency: "CAD", symbol: "C$",  defaultRate: 5,  invoiceLabel: "Invoice" },
+  DE: { name: "Germany",        taxName: "MwSt",    currency: "EUR", symbol: "€",   defaultRate: 19, invoiceLabel: "Invoice" },
+  IE: { name: "Ireland",        taxName: "VAT",     currency: "EUR", symbol: "€",   defaultRate: 23, invoiceLabel: "VAT Invoice" },
+  IN: { name: "India",          taxName: "GST",     currency: "INR", symbol: "₹",   defaultRate: 18, invoiceLabel: "Tax Invoice" },
+  NL: { name: "Netherlands",    taxName: "BTW",     currency: "EUR", symbol: "€",   defaultRate: 21, invoiceLabel: "Invoice" },
+  NZ: { name: "New Zealand",    taxName: "GST",     currency: "NZD", symbol: "NZ$", defaultRate: 15, invoiceLabel: "Tax Invoice" },
+  ZA: { name: "South Africa",   taxName: "VAT",     currency: "ZAR", symbol: "R",   defaultRate: 15, invoiceLabel: "Tax Invoice" },
 };
 
 let items = [];
@@ -1155,7 +1155,7 @@ function render() {
         ${sEmail ? `<p style="font-size:11px;color:#888">${escHtml(sEmail)}</p>` : ''}
       </div>
       <div class="inv-meta">
-        <div class="inv-title">INVOICE</div>
+        <div class="inv-title">${(country.invoiceLabel || "Invoice").toUpperCase()}</div>
         <div class="inv-meta-row">
           <span class="inv-meta-label">Invoice #</span>
           <span class="inv-meta-val">${escHtml(invNum)}</span>
