@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — VATchecker</title>
+<meta name="description" content="VATchecker is a free, independent set of tools to help freelancers and small businesses check VAT/GST registration thresholds, rates, and generate invoices.">
+<link rel="canonical" href="https://vatchecker.org/about.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vatchecker.org/about.html">
+<meta property="og:title" content="About — VATchecker">
+<meta property="og:description" content="VATchecker is a free, independent set of tools to help freelancers and small businesses check VAT/GST registration thresholds, rates, and generate invoices.">
+<meta property="og:site_name" content="VATchecker">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#0f0f0f;--ink-2:#4a4a4a;--ink-3:#8a8a8a;--paper:#fafaf8;--paper-2:#f2f1ed;--line:#e0ded8;--accent:#1a5cff;--accent-pale:#eef2ff;--radius:8px;--radius-lg:14px; }
+  * { box-sizing:border-box;margin:0;padding:0; }
+  body { font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.7;min-height:100vh; }
+  nav { background:var(--paper);border-bottom:1px solid var(--line);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:10; }
+  .logo { font-family:'Syne',sans-serif;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:6px;text-decoration:none; }
+  .logo-dot { color:var(--accent); }
+  .nav-links { display:flex;gap:1.5rem;list-style:none; }
+  .nav-links a { font-size:13px;color:var(--ink-2);text-decoration:none; }
+  .nav-links a:hover { color:var(--ink); }
+  .nav-links a.active { color:var(--accent);font-weight:500; }
+  .nav-hamburger { display:none;background:none;border:none;cursor:pointer;color:var(--ink-2);padding:4px;border-radius:var(--radius); }
+  .mobile-nav { display:none;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:0.75rem 2rem;position:sticky;top:56px;z-index:9; }
+  .mobile-nav.open { display:flex; }
+  .mobile-nav a { font-size:14px;color:var(--ink-2);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--line); }
+  .mobile-nav a:last-child { border-bottom:none; }
+  .mobile-nav a:hover { color:var(--ink); }
+  .mobile-nav a.active { color:var(--accent);font-weight:500; }
+  @media (max-width: 900px) { .nav-links { display:none; } .nav-hamburger { display:flex; } }
+  .wrap { max-width:680px;margin:0 auto;padding:3rem 1.5rem 4rem; }
+  h1 { font-family:'Syne',sans-serif;font-size:32px;margin-bottom:0.75rem; }
+  .lede { font-size:17px;color:var(--ink-2);margin-bottom:2.5rem; }
+  h2 { font-size:18px;font-weight:600;margin:2.25rem 0 0.6rem; }
+  p { color:var(--ink-2);margin-bottom:1rem; }
+  ul { color:var(--ink-2);margin:0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom:0.4rem; }
+  a { color:var(--accent);text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .tools-list { display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:1.25rem 0; }
+  .tool-link { display:block;padding:0.9rem 1rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff;text-decoration:none;color:var(--ink);font-size:13px;font-weight:500; }
+  .tool-link:hover { border-color:var(--accent);text-decoration:none; }
+  @media (max-width: 480px) { .tools-list { grid-template-columns:1fr; } }
+  footer { border-top:1px solid var(--line);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-3);max-width:680px;margin:0 auto;flex-wrap:wrap;gap:0.5rem; }
+  footer a { color:var(--ink-3);text-decoration:none; }
+  footer a:hover { color:var(--accent); }
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="index.html">VAT<span class="logo-dot">·</span>checker</a>
+  <ul class="nav-links">
+    <li><a href="index.html">VAT checker</a></li>
+    <li><a href="country-guides.html">Country guides</a></li>
+    <li><a href="invoice.html">Invoice generator</a></li>
+    <li><a href="reverse-vat.html">Reverse VAT</a></li>
+    <li><a href="vat-validator.html">VAT validator</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('mnav').classList.toggle('open')" aria-label="Menu">
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</nav>
+<div class="mobile-nav" id="mnav">
+  <a href="index.html">VAT checker</a>
+  <a href="country-guides.html">Country guides</a>
+  <a href="invoice.html">Invoice generator</a>
+  <a href="reverse-vat.html">Reverse VAT</a>
+  <a href="vat-validator.html">VAT validator</a>
+</div>
+
+<div class="wrap">
+  <h1>About VATchecker</h1>
+  <p class="lede">Free, independent tools that help freelancers and small businesses make sense of VAT and GST — without the jargon.</p>
+
+  <h2>Why we built this</h2>
+  <p>Figuring out whether you need to register for VAT or GST shouldn't require an accountant and an afternoon. Registration thresholds, rates, and filing rules vary wildly between countries and change every year — so we built a set of free tools that give small business owners and freelancers a quick, plain-English answer, backed by official government sources.</p>
+
+  <h2>What VATchecker offers</h2>
+  <div class="tools-list">
+    <a class="tool-link" href="index.html">VAT / GST threshold checker</a>
+    <a class="tool-link" href="invoice.html">VAT invoice generator</a>
+    <a class="tool-link" href="reverse-vat.html">Reverse VAT calculator</a>
+    <a class="tool-link" href="vat-validator.html">VAT number validator</a>
+    <a class="tool-link" href="country-guides.html">Country VAT/GST guide</a>
+  </div>
+
+  <h2>How we keep data accurate</h2>
+  <p>Rates and thresholds are sourced directly from official tax authority websites (HMRC, ATO, CRA, BZSt, Revenue.ie, and others) and verified periodically. EU VAT number validation uses the European Commission's live VIES API. That said, tax rules change — always confirm anything important with the official source or a qualified accountant. See our <a href="disclaimer.html">disclaimer</a> for details.</p>
+
+  <h2>How the site is funded</h2>
+  <p>VATchecker is free to use and supported by display advertising (Google AdSense). We don't charge for any tool on this site and never will. See our <a href="privacy.html">privacy policy</a> for details on how advertising cookies are used.</p>
+
+  <h2>Get in touch</h2>
+  <p>Spotted an error in a rate or threshold? Have a suggestion? We'd like to hear it — visit our <a href="contact.html">contact page</a>.</p>
+</div>
+
+<footer>
+  <span>© 2026 VATchecker</span>
+  <span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="disclaimer.html">Disclaimer</a></span>
+</footer>
+</body>
+</html>
