@@ -872,7 +872,8 @@
         </label>
       </div>
 
-      <button class="btn-check" onclick="checkVAT()">Check my VAT / GST status →</button>
+      <button class="btn-check" onclick="checkVAT()">Recalculate</button>
+      <div style="font-size:11px;color:var(--ink-3);text-align:center;margin-top:8px">Your result updates automatically as you type.</div>
     </div>
 
     <!-- RESULT PANEL -->
@@ -885,7 +886,7 @@
           </svg>
         </div>
         <h3>Your result will appear here</h3>
-        <p>Fill in your details on the left and hit Check.</p>
+        <p>Fill in your details on the left — your result updates instantly.</p>
       </div>
 
       <div id="result-panel">
@@ -1395,6 +1396,16 @@ window.addEventListener('load', async () => {
 document.getElementById('country').addEventListener('change', function() {
   updateRevenueLabel(this.value);
   checkVAT();
+});
+
+document.getElementById('biz-type').addEventListener('change', checkVAT);
+document.getElementById('intl-yes').addEventListener('change', checkVAT);
+document.getElementById('intl-no').addEventListener('change', checkVAT);
+
+let revenueDebounce = null;
+document.getElementById('revenue').addEventListener('input', function() {
+  clearTimeout(revenueDebounce);
+  revenueDebounce = setTimeout(checkVAT, 250);
 });
 </script>
 </body>
