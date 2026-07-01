@@ -147,6 +147,8 @@
     padding: 3.5rem 2rem 2.5rem;
     max-width: 760px;
     margin: 0 auto;
+    background: linear-gradient(180deg, rgba(26, 92, 255, 0.02) 0%, transparent 100%);
+    border-radius: var(--radius-lg);
   }
 
   .hero-eyebrow {
@@ -206,6 +208,12 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .panel:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.03);
   }
 
   .panel-title {
