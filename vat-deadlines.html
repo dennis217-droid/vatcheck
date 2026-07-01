@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VAT/GST Return Deadline Calendar & Countdown — VATchecker</title>
-<meta name="description" content="Work out your next VAT or GST return due date and count down to it. Free calendar for UK, EU, Australia, Canada, India, NZ and South Africa.">
-<link rel="canonical" href="https://vatchecker.org/vat-deadlines.html">
+<title id="page-title">VAT/GST Return Deadline Calendar & Countdown — VATchecker</title>
+<meta id="page-description" name="description" content="Work out your next VAT or GST return due date and count down to it. Free deadline calculator for UK, Australia, Canada, Germany, Ireland, India, Netherlands, New Zealand, and South Africa.">
+<link rel="canonical" id="canonical-url" href="https://vatchecker.org/vat-deadlines.html">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://vatchecker.org/vat-deadlines.html">
-<meta property="og:title" content="VAT/GST Return Deadline Calendar & Countdown — VATchecker">
-<meta property="og:description" content="Work out your next VAT or GST return due date and count down to it. Free calendar for UK, EU, Australia, Canada, India, NZ and South Africa.">
+<meta property="og:url" id="og-url" content="https://vatchecker.org/vat-deadlines.html">
+<meta property="og:title" id="og-title" content="VAT/GST Return Deadline Calendar & Countdown — VATchecker">
+<meta property="og:description" id="og-description" content="Work out your next VAT or GST return due date and count down to it. Free deadline calculator for UK, Australia, Canada, Germany, Ireland, India, Netherlands, New Zealand, and South Africa.">
 <meta property="og:site_name" content="VATchecker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VAT/GST Return Deadline Calendar & Countdown — VATchecker">
-<meta name="twitter:description" content="Work out your next VAT or GST return due date and count down to it. Free calendar for UK, EU, Australia, Canada, India, NZ and South Africa.">
+<meta name="twitter:title" id="tw-title" content="VAT/GST Return Deadline Calendar & Countdown — VATchecker">
+<meta name="twitter:description" id="tw-description" content="Work out your next VAT or GST return due date and count down to it. Free deadline calculator for UK, Australia, Canada, Germany, Ireland, India, Netherlands, New Zealand, and South Africa.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script async src="https://fundingchoicesmessages.google.com/i/pub-7944546027612121?ers=1"></script>
 <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
@@ -47,7 +47,7 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background: var(--paper);
+    background: linear-gradient(135deg, #fafaf8 0%, #f5f3f8 50%, #f0eefd 100%);
     color: var(--ink);
     font-size: 15px;
     line-height: 1.6;
@@ -107,7 +107,11 @@
     .nav-hamburger { display: flex; }
   }
 
-  .hero { text-align: center; padding: 3rem 2rem 2rem; max-width: 680px; margin: 0 auto; }
+  .breadcrumb { font-size: 12px; color: var(--ink-3); padding: 1rem 2rem 0; max-width: 900px; margin: 0 auto; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  .hero { text-align: center; padding: 3rem 2rem 2rem; max-width: 680px; margin: 0 auto; background: linear-gradient(180deg, rgba(26, 92, 255, 0.02) 0%, transparent 100%); border-radius: var(--radius-lg); margin-bottom: 1rem; }
   .hero-eyebrow { font-size: 12px; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
   .hero h1 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 32px; line-height: 1.15; margin-bottom: 0.75rem; }
   .hero p { font-size: 15px; color: var(--ink-2); }
@@ -120,7 +124,14 @@
   .tool-wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
   .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
 
-  .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; }
+  @media (max-width: 768px) {
+    .tool-grid { grid-template-columns: 1fr; }
+    .tool-wrap { padding: 0 1rem 2rem; }
+    .panel { padding: 1.2rem; }
+  }
+
+  .panel { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02); transition: box-shadow 0.2s ease; }
+  .panel:hover { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), 0 8px 20px rgba(0, 0, 0, 0.03); }
   .panel-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.25rem; }
 
   .field { margin-bottom: 1.1rem; }
@@ -156,7 +167,6 @@
 
   .field-hint { font-size: 12px; color: var(--ink-3); margin-top: 5px; }
 
-  /* COUNTDOWN */
   .countdown-card {
     background: var(--accent-pale);
     border: 1px solid #c7d6ff;
@@ -185,7 +195,6 @@
   .countdown-card.soon .countdown-label { color: var(--warning); }
   .countdown-card.soon .countdown-num { color: var(--warning); }
 
-  /* UPCOMING TABLE */
   .upcoming-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.75rem; }
 
   .upcoming-row {
@@ -202,6 +211,10 @@
   .upcoming-due { font-weight: 600; color: var(--ink); }
   .upcoming-row.is-next .upcoming-due { color: var(--accent); }
 
+  .action-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
+  .action-btn { flex: 1; padding: 10px 12px; background: var(--accent-pale); border: 1px solid #c7d6ff; border-radius: var(--radius); color: var(--accent-text); text-decoration: none; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; transition: background 0.15s; }
+  .action-btn:hover { background: #dbe4ff; }
+
   .disclaimer {
     background: var(--paper-2);
     border-left: 3px solid var(--line);
@@ -213,7 +226,19 @@
     margin-top: 1.25rem;
   }
 
-  /* MORE TOOLS */
+  .country-info {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .country-info h3 { font-size: 16px; margin-bottom: 0.75rem; }
+  .country-info p { font-size: 13px; color: var(--ink-2); margin-bottom: 0.75rem; }
+  .country-info a { color: var(--accent); text-decoration: none; }
+  .country-info a:hover { text-decoration: underline; }
+
   .more-tools-label { font-size: 11px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin: 2.5rem 0 1rem; }
   .tools-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
   @media (max-width: 600px) { .tools-row { grid-template-columns: 1fr; } }
@@ -232,23 +257,26 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "When is my VAT or GST return due?",
-      "acceptedAnswer": { "@type": "Answer", "text": "It depends on your country and filing frequency. Most VAT/GST returns are due a fixed number of days or weeks after the end of your reporting period — for example, UK VAT returns are due one calendar month and 7 days after the period ends. Use the calculator above to estimate your next due date." }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens if I file my VAT/GST return late?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Most tax authorities charge a late filing penalty and interest on any tax paid late, even if you file on time but pay late. Penalties vary by country and by how late the return is — check with your local tax authority for exact amounts." }
-    },
-    {
-      "@type": "Question",
-      "name": "Can my VAT filing periods be different from the calendar quarter?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Many tax authorities assign staggered VAT periods (e.g. periods ending Jan/Apr/Jul/Oct instead of Mar/Jun/Sep/Dec) depending on when you registered. Always check your actual period dates on your tax authority's online portal or registration certificate." }
-    }
+  "@type": "Tool",
+  "name": "VAT/GST Return Deadline Calendar",
+  "description": "Calculate your next VAT or GST return due date and count down to it across 9 countries",
+  "url": "https://vatchecker.org/vat-deadlines.html",
+  "applicationCategory": "BusinessApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "areaServed": [
+    {"@type": "Country", "name": "United Kingdom"},
+    {"@type": "Country", "name": "Australia"},
+    {"@type": "Country", "name": "Canada"},
+    {"@type": "Country", "name": "Germany"},
+    {"@type": "Country", "name": "Ireland"},
+    {"@type": "Country", "name": "India"},
+    {"@type": "Country", "name": "Netherlands"},
+    {"@type": "Country", "name": "New Zealand"},
+    {"@type": "Country", "name": "South Africa"}
   ]
 }
 </script>
@@ -278,10 +306,14 @@
   <a href="vat-deadlines.html" class="active">Deadlines</a>
 </div>
 
+<div class="breadcrumb" id="breadcrumb">
+  <a href="/">Home</a> / <a href="/vat-deadlines.html">Return Deadline Calculator</a> / <span id="breadcrumb-country">Select a country</span>
+</div>
+
 <div class="hero">
   <div class="hero-eyebrow">Free calculator</div>
-  <h1>VAT/GST Return Deadline Calendar</h1>
-  <p>Work out your next return due date and count down to it — for 9 countries.</p>
+  <h1 id="hero-title">VAT/GST Return Deadline Calendar</h1>
+  <p id="hero-subtitle">Work out your next return due date and count down to it — for 9 countries.</p>
 </div>
 
 <div class="ad-slot" style="max-width:900px;margin:0 auto 1.5rem;padding:0 1.5rem">
@@ -309,7 +341,6 @@
 <div class="tool-wrap">
   <div class="tool-grid">
 
-    <!-- INPUT PANEL -->
     <div class="panel">
       <div class="panel-title">Your filing details</div>
 
@@ -344,9 +375,14 @@
         <input type="date" id="period-end" onchange="calculate()" />
         <div class="field-hint">Defaults to a calendar-aligned guess. Check your tax authority portal and adjust if your periods are staggered.</div>
       </div>
+
+      <div class="country-info" id="country-info" style="display:none;">
+        <h3 id="country-name"></h3>
+        <p id="country-description"></p>
+        <p><strong>Tax authority:</strong> <a id="tax-authority-link" href="#" target="_blank"></a></p>
+      </div>
     </div>
 
-    <!-- RESULT PANEL -->
     <div class="panel">
       <div class="panel-title">Next return due</div>
 
@@ -361,6 +397,11 @@
         <div class="countdown-due">Due <strong id="due-date-text">—</strong> for the period ending <strong id="period-end-text">—</strong></div>
       </div>
 
+      <div class="action-buttons">
+        <button class="action-btn" onclick="exportToCalendar()">📅 Add to Calendar</button>
+        <button class="action-btn" onclick="copyDeadline()">📋 Copy</button>
+      </div>
+
       <div class="upcoming-title">Upcoming deadlines</div>
       <div id="upcoming-list"></div>
 
@@ -370,7 +411,6 @@
     </div>
   </div>
 
-  <!-- MORE TOOLS -->
   <div class="more-tools-label">More free tools</div>
   <div class="tools-row">
     <a class="tool-card" href="index.html">
@@ -403,24 +443,150 @@
 </footer>
 
 <script>
-// lag(periodEnd, freq) returns the due date for a given period end + filing
-// frequency. Most countries use the same offset regardless of frequency, but
-// several (AU, CA, DE, IN) have a materially different rule for at least one
-// frequency, so those are branched explicitly below.
+// Country metadata with proper VAT/GST terminology
+const COUNTRY_DATA = {
+  UK: {
+    name: 'United Kingdom',
+    taxType: 'VAT',
+    description: 'Value Added Tax (VAT) return deadlines for UK registered businesses.',
+    taxAuthority: 'HMRC (Her Majesty\'s Revenue & Customs)',
+    taxAuthorityUrl: 'https://www.gov.uk/vat',
+    taxAuthorityPortal: 'https://www.tax.service.gov.uk/'
+  },
+  AU: {
+    name: 'Australia',
+    taxType: 'GST',
+    description: 'Goods and Services Tax (GST) Business Activity Statement (BAS) deadlines for Australian businesses.',
+    taxAuthority: 'ATO (Australian Taxation Office)',
+    taxAuthorityUrl: 'https://www.ato.gov.au/business/gst/',
+    taxAuthorityPortal: 'https://www.ato.gov.au/online-services/'
+  },
+  CA: {
+    name: 'Canada',
+    taxType: 'GST/HST',
+    description: 'Goods and Services Tax (GST) and Harmonized Sales Tax (HST) return deadlines for Canadian businesses.',
+    taxAuthority: 'CRA (Canada Revenue Agency)',
+    taxAuthorityUrl: 'https://www.canada.ca/taxes/businesses/topics/gst-hst',
+    taxAuthorityPortal: 'https://www.canada.ca/taxes/businesses/topics/gst-hst/register/online-filing'
+  },
+  DE: {
+    name: 'Germany',
+    taxType: 'MwSt',
+    description: 'Mehrwertsteuer (MwSt) and Umsatzsteuer-Voranmeldung filing deadlines for German businesses.',
+    taxAuthority: 'Bundeszentralamt für Steuern (BZSt)',
+    taxAuthorityUrl: 'https://www.bzst.bund.de/DE/Steuern_und_Finanzen/Umsatzsteuer/umsatzsteuer_node.html',
+    taxAuthorityPortal: 'https://www.elster.de/'
+  },
+  IE: {
+    name: 'Ireland',
+    taxType: 'VAT',
+    description: 'Value Added Tax (VAT) return deadlines for Irish registered businesses.',
+    taxAuthority: 'Revenue Commissioners',
+    taxAuthorityUrl: 'https://www.revenue.ie/en/business/vat/index.aspx',
+    taxAuthorityPortal: 'https://www.revenue.ie/en/online-services/index.aspx'
+  },
+  IN: {
+    name: 'India',
+    taxType: 'GST',
+    description: 'Goods and Services Tax (GST) GSTR-3B return deadlines for Indian registered businesses.',
+    taxAuthority: 'GST Council / GSTN',
+    taxAuthorityUrl: 'https://www.gst.gov.in/',
+    taxAuthorityPortal: 'https://www.gst.gov.in/ojas/welcome'
+  },
+  NL: {
+    name: 'Netherlands',
+    taxType: 'BTW',
+    description: 'Belasting over de Toegevoegde Waarde (BTW) return deadlines for Dutch businesses.',
+    taxAuthority: 'Dutch Tax Authority (Belastingdienst)',
+    taxAuthorityUrl: 'https://www.belastingdienst.nl/ondernemer/btw',
+    taxAuthorityPortal: 'https://www.belastingdienst.nl/zakelijk/'
+  },
+  NZ: {
+    name: 'New Zealand',
+    taxType: 'GST',
+    description: 'Goods and Services Tax (GST) return deadlines for New Zealand registered businesses.',
+    taxAuthority: 'Inland Revenue (Te Tari Taake)',
+    taxAuthorityUrl: 'https://www.ird.govt.nz/gst',
+    taxAuthorityPortal: 'https://www.ird.govt.nz/online-services'
+  },
+  ZA: {
+    name: 'South Africa',
+    taxType: 'VAT',
+    description: 'Value Added Tax (VAT) return deadlines for South African registered businesses.',
+    taxAuthority: 'SARS (South African Revenue Service)',
+    taxAuthorityUrl: 'https://www.sars.gov.za/types-of-taxes/vat/',
+    taxAuthorityPortal: 'https://www.sars.gov.za/e-services/'
+  }
+};
+
+// Public holidays by country (format: YYYY-MM-DD)
+const PUBLIC_HOLIDAYS = {
+  UK: [
+    '2026-01-01', '2026-04-10', '2026-04-13', '2026-05-04', '2026-05-25', '2026-08-31', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-04-02', '2027-04-05', '2027-05-03', '2027-05-31', '2027-08-30', '2027-12-25', '2027-12-26',
+  ],
+  AU: [
+    '2026-01-01', '2026-01-26', '2026-04-10', '2026-04-13', '2026-04-25', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-01-25', '2027-04-02', '2027-04-05', '2027-04-26', '2027-12-25', '2027-12-26',
+  ],
+  CA: [
+    '2026-01-01', '2026-02-16', '2026-04-10', '2026-05-18', '2026-07-01', '2026-09-07', '2026-09-30', '2026-10-12', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-02-15', '2027-04-02', '2027-05-17', '2027-07-01', '2027-09-06', '2027-09-30', '2027-10-11', '2027-12-25', '2027-12-26',
+  ],
+  DE: [
+    '2026-01-01', '2026-04-10', '2026-04-13', '2026-05-01', '2026-05-21', '2026-06-01', '2026-10-03', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-04-02', '2027-04-05', '2027-05-01', '2027-05-13', '2027-05-24', '2027-10-03', '2027-12-25', '2027-12-26',
+  ],
+  IE: [
+    '2026-01-01', '2026-02-06', '2026-03-17', '2026-04-13', '2026-05-04', '2026-08-03', '2026-10-26', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-02-05', '2027-03-17', '2027-04-05', '2027-05-03', '2027-08-02', '2027-10-25', '2027-12-25', '2027-12-26',
+  ],
+  IN: [
+    '2026-01-26', '2026-03-25', '2026-04-10', '2026-04-14', '2026-05-01', '2026-08-15', '2026-10-02', '2026-10-25', '2026-12-25',
+    '2027-01-26', '2027-03-11', '2027-04-02', '2027-04-21', '2027-05-01', '2027-08-15', '2027-10-02', '2027-11-08', '2027-12-25',
+  ],
+  NL: [
+    '2026-01-01', '2026-04-10', '2026-04-13', '2026-05-05', '2026-05-14', '2026-05-24', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-04-02', '2027-04-05', '2027-05-05', '2027-05-13', '2027-05-23', '2027-12-25', '2027-12-26',
+  ],
+  NZ: [
+    '2026-01-01', '2026-01-02', '2026-02-06', '2026-04-10', '2026-04-13', '2026-04-27', '2026-06-01', '2026-10-26', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-01-04', '2027-02-05', '2027-04-02', '2027-04-05', '2027-04-26', '2027-06-07', '2027-10-25', '2027-12-25', '2027-12-26',
+  ],
+  ZA: [
+    '2026-01-01', '2026-03-21', '2026-04-10', '2026-04-13', '2026-05-01', '2026-06-17', '2026-07-09', '2026-08-09', '2026-09-24', '2026-12-16', '2026-12-25', '2026-12-26',
+    '2027-01-01', '2027-03-21', '2027-04-02', '2027-04-05', '2027-05-01', '2027-06-17', '2027-07-09', '2027-08-09', '2027-09-24', '2027-12-16', '2027-12-25', '2027-12-26',
+  ]
+};
+
+function isBusinessDay(date) {
+  const dayOfWeek = date.getDay();
+  if (dayOfWeek === 0 || dayOfWeek === 6) return false;
+
+  const dateStr = isoDate(date);
+  const countryCode = document.getElementById('country').value;
+  const holidays = PUBLIC_HOLIDAYS[countryCode] || [];
+
+  return !holidays.includes(dateStr);
+}
+
+function shiftToBusinessDay(date) {
+  let d = new Date(date);
+  let attempts = 0;
+  while (!isBusinessDay(d) && attempts < 10) {
+    d.setDate(d.getDate() + 1);
+    attempts++;
+  }
+  return d;
+}
+
 const COUNTRY_RULES = {
   UK: {
     defaultFreq: 'quarterly',
-    // VAT return + payment due 1 calendar month + 7 days after period end,
-    // regardless of filing frequency.
     lag: (d) => { d = addMonths(d, 1); d.setDate(d.getDate() + 7); return d; },
   },
   AU: {
     defaultFreq: 'quarterly',
-    // Monthly BAS: due on the 21st of the following month.
-    // Quarterly BAS: due 28 days after quarter end (Q2 Oct-Dec is a known
-    // exception, extended to 28 Feb — not modelled here).
-    // Annual GST (small voluntary payers): due with the income tax return,
-    // approximated here as 3 months after period end.
     lag: (d, freq) => {
       if (freq === 'monthly') { d = addMonths(d, 1); d.setDate(21); return d; }
       if (freq === 'annual') return addMonths(d, 3);
@@ -429,16 +595,10 @@ const COUNTRY_RULES = {
   },
   CA: {
     defaultFreq: 'quarterly',
-    // Monthly/quarterly: due 1 month after period end.
-    // Annual: most filers must file 3 months after fiscal year-end (sole
-    // proprietors with a Dec 31 year-end get an extended June 15 filing
-    // deadline, but still owe payment by Apr 30 — not modelled here).
     lag: (d, freq) => freq === 'annual' ? addMonths(d, 3) : addMonths(d, 1),
   },
   DE: {
     defaultFreq: 'monthly',
-    // Monthly/quarterly Umsatzsteuer-Voranmeldung: due 10 days after period end.
-    // Annual return (Steuererklärung): due 31 July of the following year.
     lag: (d, freq) => {
       if (freq === 'annual') return new Date(d.getFullYear() + 1, 6, 31);
       return addDays(d, 10);
@@ -446,16 +606,10 @@ const COUNTRY_RULES = {
   },
   IE: {
     defaultFreq: 'bimonthly',
-    // Standard VAT3 return due on the 19th of the month after the period
-    // (23rd for ROS-extended filers — not modelled here), regardless of
-    // whether you're on monthly, bi-monthly, or annual filing.
     lag: (d) => addDays(d, 19),
   },
   IN: {
     defaultFreq: 'monthly',
-    // Monthly GSTR-3B: due on the 20th of the following month.
-    // Quarterly QRMP scheme: due on the 22nd or 24th depending on state —
-    // approximated here as the 22nd.
     lag: (d, freq) => {
       d = addMonths(d, 1);
       d.setDate(freq === 'quarterly' ? 22 : 20);
@@ -464,25 +618,22 @@ const COUNTRY_RULES = {
   },
   NL: {
     defaultFreq: 'quarterly',
-    // Due by the end of the month following the period, regardless of
-    // filing frequency.
     lag: (d) => lastDayOfMonth(addMonths(d, 1)),
   },
   NZ: {
     defaultFreq: 'bimonthly',
-    // Due on the 28th of the month following the period (the Nov period's
-    // due date is pushed to 15 Jan — not modelled here).
     lag: (d) => { d = addMonths(d, 1); d.setDate(28); return d; },
   },
   ZA: {
     defaultFreq: 'bimonthly',
-    // Category A/B vendors: due on the 25th of the month following the
-    // period (eFiling sometimes extends this a few more days).
     lag: (d) => { d = addMonths(d, 1); d.setDate(25); return d; },
   },
 };
 
 const FREQ_MONTHS = { monthly: 1, bimonthly: 2, quarterly: 3, biannual: 6, annual: 12 };
+
+let currentDueDate = null;
+let currentPeriodEnd = null;
 
 function addDays(date, n) {
   const d = new Date(date);
@@ -519,37 +670,116 @@ function fmtDateShort(d) {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-// Find the next calendar-aligned period end (last day of a month) on or before today,
-// for the given frequency, anchored to December (so periods always land on
-// Dec, or Dec/Jun for biannual, or Mar/Jun/Sep/Dec for quarterly, etc.)
 function guessNextPeriodEnd(freq) {
   const months = FREQ_MONTHS[freq];
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  // Walk forward from the start of this year in `months`-month steps until we
-  // find a period end >= today.
-  let cursor = new Date(today.getFullYear() - 1, 11, 31); // last Dec 31
+  let cursor = new Date(today.getFullYear() - 1, 11, 31);
+  cursor = lastDayOfMonth(addMonths(cursor, months));
   while (cursor < today) {
     cursor = lastDayOfMonth(addMonths(cursor, months));
   }
   return cursor;
 }
 
+function updateMetaTags() {
+  const code = document.getElementById('country').value;
+  const countryData = COUNTRY_DATA[code];
+  const taxType = countryData.taxType;
+  const countryName = countryData.name;
+
+  const title = `${taxType} Deadline Calculator for ${countryName} — VATchecker`;
+  const description = `Calculate your next ${taxType} return due date in ${countryName}. Free deadline calculator with automatic reminders.`;
+
+  document.getElementById('page-title').textContent = title;
+  document.getElementById('page-description').setAttribute('content', description);
+  document.getElementById('og-title').setAttribute('content', title);
+  document.getElementById('og-description').setAttribute('content', description);
+  document.getElementById('tw-title').textContent = title;
+  document.getElementById('tw-description').textContent = description;
+
+  document.getElementById('canonical-url').setAttribute('href', `https://vatchecker.org/vat-deadlines.html?country=${code}`);
+  document.getElementById('og-url').setAttribute('content', `https://vatchecker.org/vat-deadlines.html?country=${code}`);
+
+  document.getElementById('breadcrumb-country').textContent = `${countryName} ${taxType}`;
+  document.getElementById('hero-title').textContent = `${taxType} Return Deadline Calendar`;
+  document.getElementById('hero-subtitle').textContent = `Work out your next ${taxType} return due date and count down to it — for ${countryName}.`;
+}
+
+function updateCountryInfo() {
+  const code = document.getElementById('country').value;
+  const data = COUNTRY_DATA[code];
+
+  document.getElementById('country-name').textContent = data.name;
+  document.getElementById('country-description').textContent = data.description;
+  document.getElementById('tax-authority-link').textContent = data.taxAuthority;
+  document.getElementById('tax-authority-link').href = data.taxAuthorityPortal;
+  document.getElementById('country-info').style.display = 'block';
+}
+
+function findSoonestDeadline() {
+  const code = document.getElementById('country').value;
+  const freq = document.getElementById('frequency').value;
+  const rule = COUNTRY_RULES[code];
+  const months = FREQ_MONTHS[freq];
+
+  const now = new Date();
+  let soonestDueDate = null;
+  let soonestPeriodEnd = null;
+
+  let cursor = guessNextPeriodEnd(freq);
+  cursor = lastDayOfMonth(addMonths(cursor, -2 * months));
+
+  for (let i = 0; i < 30; i++) {
+    let dueDate = rule.lag(new Date(cursor), freq);
+    dueDate = shiftToBusinessDay(dueDate);
+    if (dueDate >= now && (!soonestDueDate || dueDate < soonestDueDate)) {
+      soonestDueDate = dueDate;
+      soonestPeriodEnd = new Date(cursor);
+    }
+    cursor = lastDayOfMonth(addMonths(cursor, months));
+  }
+
+  currentDueDate = soonestDueDate;
+  currentPeriodEnd = soonestPeriodEnd;
+
+  document.getElementById('period-end').value = isoDate(soonestPeriodEnd);
+  document.getElementById('period-end-text').textContent = fmtDateShort(soonestPeriodEnd);
+  document.getElementById('due-date-text').textContent = fmtDate(soonestDueDate);
+
+  if (window.countdownTimer) clearInterval(window.countdownTimer);
+  updateCountdown(soonestDueDate);
+  window.countdownTimer = setInterval(() => updateCountdown(soonestDueDate), 1000);
+
+  const list = document.getElementById('upcoming-list');
+  list.innerHTML = '';
+  let pEnd = soonestPeriodEnd;
+  for (let i = 0; i < 4; i++) {
+    let due = rule.lag(new Date(pEnd), freq);
+    due = shiftToBusinessDay(due);
+    const row = document.createElement('div');
+    row.className = 'upcoming-row' + (i === 0 ? ' is-next' : '');
+    row.innerHTML = `
+      <span class="upcoming-period">Period ending ${fmtDateShort(pEnd)}</span>
+      <span class="upcoming-due">${fmtDateShort(due)}</span>
+    `;
+    list.appendChild(row);
+    pEnd = lastDayOfMonth(addMonths(pEnd, months));
+  }
+}
+
 function onCountryChange() {
   const code = document.getElementById('country').value;
   const rule = COUNTRY_RULES[code];
   document.getElementById('frequency').value = rule.defaultFreq;
-  onFrequencyChange();
+  updateMetaTags();
+  updateCountryInfo();
+  findSoonestDeadline();
 }
 
 function onFrequencyChange() {
-  const freq = document.getElementById('frequency').value;
-  const guess = guessNextPeriodEnd(freq);
-  document.getElementById('period-end').value = isoDate(guess);
-  calculate();
+  findSoonestDeadline();
 }
-
-let countdownTimer = null;
 
 function calculate() {
   const code = document.getElementById('country').value;
@@ -561,27 +791,31 @@ function calculate() {
   let periodEnd = new Date(periodEndInput + 'T00:00:00');
   const months = FREQ_MONTHS[freq];
 
-  // Step forward through periods until the due date is in the future.
   let dueDate = rule.lag(new Date(periodEnd), freq);
+  dueDate = shiftToBusinessDay(dueDate);
   const now = new Date();
   while (dueDate < now) {
     periodEnd = lastDayOfMonth(addMonths(periodEnd, months));
     dueDate = rule.lag(new Date(periodEnd), freq);
+    dueDate = shiftToBusinessDay(dueDate);
   }
+
+  currentDueDate = dueDate;
+  currentPeriodEnd = periodEnd;
 
   document.getElementById('period-end-text').textContent = fmtDateShort(periodEnd);
   document.getElementById('due-date-text').textContent = fmtDate(dueDate);
 
-  if (countdownTimer) clearInterval(countdownTimer);
+  if (window.countdownTimer) clearInterval(window.countdownTimer);
   updateCountdown(dueDate);
-  countdownTimer = setInterval(() => updateCountdown(dueDate), 1000);
+  window.countdownTimer = setInterval(() => updateCountdown(dueDate), 1000);
 
-  // Upcoming deadlines list
   const list = document.getElementById('upcoming-list');
   list.innerHTML = '';
   let pEnd = periodEnd;
   for (let i = 0; i < 4; i++) {
-    const due = rule.lag(new Date(pEnd), freq);
+    let due = rule.lag(new Date(pEnd), freq);
+    due = shiftToBusinessDay(due);
     const row = document.createElement('div');
     row.className = 'upcoming-row' + (i === 0 ? ' is-next' : '');
     row.innerHTML = `
@@ -622,9 +856,82 @@ function updateCountdown(dueDate) {
   document.getElementById('cd-secs').textContent = secs;
 }
 
-// Boot
+function exportToCalendar() {
+  if (!currentDueDate || !currentPeriodEnd) return;
+
+  const code = document.getElementById('country').value;
+  const countryData = COUNTRY_DATA[code];
+  const title = `${countryData.taxType} Return Due`;
+  const description = `${countryData.taxType} return deadline for period ending ${fmtDateShort(currentPeriodEnd)}. File at: ${countryData.taxAuthorityUrl}`;
+
+  const ical = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//VATchecker//Deadline//EN',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    `DTSTART:${isoDate(currentDueDate).replace(/-/g, '')}`,
+    `DTEND:${isoDate(addDays(currentDueDate, 1)).replace(/-/g, '')}`,
+    `SUMMARY:${title}`,
+    `DESCRIPTION:${description}`,
+    `CREATED:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+    `UID:${currentDueDate.getTime()}@vatchecker.org`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([ical], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${countryData.taxType}-deadline-${isoDate(currentDueDate)}.ics`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function copyDeadline() {
+  if (!currentDueDate || !currentPeriodEnd) return;
+  const code = document.getElementById('country').value;
+  const countryData = COUNTRY_DATA[code];
+  const text = `${countryData.taxType} return due: ${fmtDate(currentDueDate)} (Period ending ${fmtDateShort(currentPeriodEnd)})`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Deadline copied to clipboard!');
+  });
+}
+
+function detectGeolocation() {
+  fetch('https://ipapi.co/json/')
+    .then(response => response.json())
+    .then(data => {
+      const countryMap = {
+        'GB': 'UK', 'AU': 'AU', 'CA': 'CA', 'DE': 'DE', 'IE': 'IE',
+        'IN': 'IN', 'NL': 'NL', 'NZ': 'NZ', 'ZA': 'ZA'
+      };
+      const countryCode = countryMap[data.country_code];
+      if (countryCode) {
+        document.getElementById('country').value = countryCode;
+        onCountryChange();
+      }
+    })
+    .catch(() => {
+      onCountryChange();
+    });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
-  onCountryChange();
+  const params = new URLSearchParams(window.location.search);
+  const countryParam = params.get('country');
+  if (countryParam) {
+    document.getElementById('country').value = countryParam;
+  }
+
+  if (!countryParam) {
+    detectGeolocation();
+  } else {
+    onCountryChange();
+  }
 });
 </script>
 </body>
