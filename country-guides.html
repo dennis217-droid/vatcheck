@@ -4,16 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Country VAT & GST Rate Guide — VATchecker</title>
-<meta name="description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 9 countries. Verified June 2026.">
+<meta name="description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 10 countries. Verified June 2026.">
 <link rel="canonical" href="https://vatchecker.org/country-guides.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vatchecker.org/country-guides.html">
 <meta property="og:title" content="Country VAT & GST Rate Guide — VATchecker">
-<meta property="og:description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 9 countries. Verified June 2026.">
+<meta property="og:description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 10 countries. Verified June 2026.">
 <meta property="og:site_name" content="VATchecker">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Country VAT & GST Rate Guide — VATchecker">
-<meta name="twitter:description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 9 countries. Verified June 2026.">
+<meta name="twitter:description" content="VAT and GST rates, registration thresholds, filing frequencies and deadlines for 10 countries. Verified June 2026.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script async src="https://fundingchoicesmessages.google.com/i/pub-7944546027612121?ers=1"></script>
 <script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
@@ -526,6 +526,14 @@ const COUNTRIES = [
     filing: 'Monthly (GSTR-3B)', deadline: 'Before starting business (most cases)',
     govLink: 'https://www.gst.gov.in/', source: 'GST Council gst.gov.in',
     notes: 'Special category states (NE states, Uttarakhand, HP, J&K) have a lower threshold of ₹1,000,000. Inter-state supplies are taxable from rupee one regardless of turnover.',
+  },
+  {
+    code: 'IT', flag: '🇮🇹', name: 'Italy', currency: 'EUR', symbol: '€',
+    taxName: 'IVA (VAT)', region: 'eu', guideUrl: 'italy-vat-guide.html',
+    threshold: 85000, rate: 22, reducedRate: 10, zeroRate: false,
+    filing: 'Monthly or quarterly', deadline: 'Before making first taxable supply',
+    govLink: 'https://www.agenziaentrate.gov.it', source: 'Agenzia delle Entrate agenziaentrate.gov.it',
+    notes: 'Regime forfettario (flat-rate scheme) exempts individuals from charging VAT if revenue stays under €85,000. Standard VAT registration has no threshold — mandatory from the first taxable supply.',
   },
   {
     code: 'NL', flag: '🇳🇱', name: 'Netherlands', currency: 'EUR', symbol: '€',

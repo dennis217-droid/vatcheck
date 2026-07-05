@@ -842,6 +842,7 @@
           <option value="DE">🇩🇪 Germany (MwSt)</option>
           <option value="IE">🇮🇪 Ireland (VAT)</option>
           <option value="IN">🇮🇳 India (GST)</option>
+          <option value="IT">🇮🇹 Italy (IVA)</option>
           <option value="NL">🇳🇱 Netherlands (BTW)</option>
           <option value="NZ">🇳🇿 New Zealand (GST)</option>
           <option value="ZA">🇿🇦 South Africa (VAT)</option>
@@ -1029,6 +1030,7 @@
     <a class="country-guide-pill" href="germany-vat-guide.html">🇩🇪 Germany VAT Guide</a>
     <a class="country-guide-pill" href="ireland-vat-guide.html">🇮🇪 Ireland VAT Guide</a>
     <a class="country-guide-pill" href="india-gst-guide.html">🇮🇳 India GST Guide</a>
+    <a class="country-guide-pill" href="italy-vat-guide.html">🇮🇹 Italy VAT Guide</a>
     <a class="country-guide-pill" href="netherlands-vat-guide.html">🇳🇱 Netherlands VAT Guide</a>
     <a class="country-guide-pill" href="new-zealand-gst-guide.html">🇳🇿 New Zealand GST Guide</a>
     <a class="country-guide-pill" href="south-africa-vat-guide.html">🇿🇦 South Africa VAT Guide</a>
@@ -1061,7 +1063,7 @@
 </div>
 
 <div class="footer-guides">
-  <a href="uk-vat-guide.html">UK VAT</a> · <a href="australia-gst-guide.html">Australia GST</a> · <a href="canada-gst-guide.html">Canada GST</a> · <a href="germany-vat-guide.html">Germany VAT</a> · <a href="ireland-vat-guide.html">Ireland VAT</a> · <a href="india-gst-guide.html">India GST</a> · <a href="netherlands-vat-guide.html">Netherlands VAT</a> · <a href="new-zealand-gst-guide.html">New Zealand GST</a> · <a href="south-africa-vat-guide.html">South Africa VAT</a>
+  <a href="uk-vat-guide.html">UK VAT</a> · <a href="australia-gst-guide.html">Australia GST</a> · <a href="canada-gst-guide.html">Canada GST</a> · <a href="germany-vat-guide.html">Germany VAT</a> · <a href="ireland-vat-guide.html">Ireland VAT</a> · <a href="india-gst-guide.html">India GST</a> · <a href="italy-vat-guide.html">Italy VAT</a> · <a href="netherlands-vat-guide.html">Netherlands VAT</a> · <a href="new-zealand-gst-guide.html">New Zealand GST</a> · <a href="south-africa-vat-guide.html">South Africa VAT</a>
 </div>
 <footer>
   <span>© 2026 VATchecker — free tools for small businesses. Rates updated June 2026.</span>
@@ -1133,6 +1135,14 @@ const FALLBACK = {
     source: "GST Council gst.gov.in", verified: "June 2026",
     digitalServicesNote: "E-commerce and digital service providers face different rules. Inter-state supplies can be taxable from the first rupee — check with a GST practitioner.",
   },
+  IT: {
+    name: "Italy", taxName: "IVA (VAT)", currency: "EUR", symbol: "€",
+    threshold: 85000, rate: 22, reducedRate: 10, zeroRate: false,
+    filing: "Monthly or quarterly", registrationDeadline: "Before making first taxable supply",
+    govLink: "https://www.agenziaentrate.gov.it",
+    source: "Agenzia delle Entrate agenziaentrate.gov.it", verified: "June 2026",
+    digitalServicesNote: "The €85,000 threshold applies to the regime forfettario flat-rate scheme for individuals. Standard VAT registration has no threshold — foreign businesses trading in Italy must register from their first taxable supply.",
+  },
   NL: {
     name: "Netherlands", taxName: "BTW (VAT)", currency: "EUR", symbol: "€",
     threshold: 0, rate: 21, reducedRate: 9, zeroRate: true,
@@ -1161,7 +1171,7 @@ const FALLBACK = {
    falls back to the hardcoded data and shows a "Verified [date]" badge
    instead of a "Live" badge — the user always gets a result.
 ────────────────────────────────────────────────────────────────────────── */
-const EU_CODES = { DE: 'DE', IE: 'IE', NL: 'NL' };
+const EU_CODES = { DE: 'DE', IE: 'IE', IT: 'IT', NL: 'NL' };
 let liveRates = {};
 let dataIsLive = false;
 
@@ -1224,6 +1234,7 @@ const AFFILIATE_COPY = {
   DE: { name: 'Lexoffice',  url: 'https://www.lexoffice.de',         copy: 'Verwaltet Ihre Umsatzsteuer automatisch und erstellt Voranmeldungen für das Finanzamt.' },
   IE: { name: 'FreshBooks', url: 'https://www.freshbooks.com',       copy: 'Tracks VAT against your €40,000 threshold and prepares returns for Revenue.ie.' },
   IN: { name: 'Zoho Books', url: 'https://www.zoho.com/books/',      copy: 'Tracks GST thresholds, files GSTR-3B, and syncs with the GST portal automatically.' },
+  IT: { name: 'Fatture in Cloud', url: 'https://www.fattureincloud.it', copy: 'Gestisce la fatturazione elettronica tramite SdI e la liquidazione IVA automaticamente.' },
   NL: { name: 'Moneybird',  url: 'https://www.moneybird.nl',         copy: 'Beheert uw BTW automatisch en dient aangiften in bij de Belastingdienst.' },
   NZ: { name: 'Xero',       url: 'https://www.xero.com/nz/',         copy: 'Tracks GST against your NZ$60,000 threshold, generates returns, and syncs with IRD.' },
   ZA: { name: 'Sage',       url: 'https://www.sage.com/en-za/',      copy: 'Tracks VAT against your R1,000,000 threshold and generates returns for SARS.' },
@@ -1345,7 +1356,7 @@ function checkVAT() {
   document.getElementById('disclaimer-gov-link').textContent = country.source;
 
   // Country guide contextual link
-  const guideMap = {GB:'uk-vat-guide.html',AU:'australia-gst-guide.html',CA:'canada-gst-guide.html',DE:'germany-vat-guide.html',IE:'ireland-vat-guide.html',IN:'india-gst-guide.html',NL:'netherlands-vat-guide.html',NZ:'new-zealand-gst-guide.html',ZA:'south-africa-vat-guide.html'};
+  const guideMap = {GB:'uk-vat-guide.html',AU:'australia-gst-guide.html',CA:'canada-gst-guide.html',DE:'germany-vat-guide.html',IE:'ireland-vat-guide.html',IN:'india-gst-guide.html',IT:'italy-vat-guide.html',NL:'netherlands-vat-guide.html',NZ:'new-zealand-gst-guide.html',ZA:'south-africa-vat-guide.html'};
   const guideEl = document.getElementById('country-guide-link');
   if (guideMap[countryCode]) {
     guideEl.href = guideMap[countryCode];

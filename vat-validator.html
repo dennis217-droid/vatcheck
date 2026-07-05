@@ -214,6 +214,7 @@
           <optgroup label="EU (live VIES check)">
             <option value="DE">🇩🇪 Germany (DE)</option>
             <option value="IE">🇮🇪 Ireland (IE)</option>
+            <option value="IT">🇮🇹 Italy (IT)</option>
             <option value="NL">🇳🇱 Netherlands (NL)</option>
           </optgroup>
           <optgroup label="Non-EU (format check only)">
@@ -263,6 +264,7 @@
       <tbody>
         <tr><td>🇩🇪 Germany</td><td>USt-IdNr.</td><td><span class="format-code">DE</span> + 9 digits</td><td><span class="format-code">DE123456789</span></td><td>✅ VIES</td></tr>
         <tr><td>🇮🇪 Ireland</td><td>VAT No.</td><td><span class="format-code">IE</span> + 8–9 chars</td><td><span class="format-code">IE1234567T</span></td><td>✅ VIES</td></tr>
+        <tr><td>🇮🇹 Italy</td><td>Partita IVA</td><td><span class="format-code">IT</span> + 11 digits</td><td><span class="format-code">IT12345678901</span></td><td>✅ VIES</td></tr>
         <tr><td>🇳🇱 Netherlands</td><td>BTW-nr.</td><td><span class="format-code">NL</span> + 9 digits + B + 2 digits</td><td><span class="format-code">NL123456789B01</span></td><td>✅ VIES</td></tr>
         <tr><td>🇬🇧 United Kingdom</td><td>VAT No.</td><td><span class="format-code">GB</span> + 9 digits</td><td><span class="format-code">GB123456789</span></td><td>Format only</td></tr>
         <tr><td>🇦🇺 Australia</td><td>ABN</td><td>11 digits</td><td><span class="format-code">51824753556</span></td><td>Format only</td></tr>
@@ -281,11 +283,12 @@
 </footer>
 
 <script>
-const EU_COUNTRIES = ['DE', 'IE', 'NL'];
+const EU_COUNTRIES = ['DE', 'IE', 'IT', 'NL'];
 
 const FORMATS = {
   DE: { prefix: 'DE', hint: 'Format: DE + 9 digits',               regex: /^DE\d{9}$/i,                   strip: true },
   IE: { prefix: 'IE', hint: 'Format: IE + 8–9 alphanumeric chars', regex: /^IE\d{7}[A-Z]{1,2}$/i,         strip: true },
+  IT: { prefix: 'IT', hint: 'Format: IT + 11 digits (Partita IVA)',regex: /^IT\d{11}$/i,                  strip: true },
   NL: { prefix: 'NL', hint: 'Format: NL + 9 digits + B + 2 digits',regex: /^NL\d{9}B\d{2}$/i,             strip: true },
   GB: { prefix: 'GB', hint: 'Format: GB + 9 digits',               regex: /^(GB)?\d{9}$/i,                strip: false },
   AU: { prefix: '',   hint: 'Format: 11 digits (ABN)',              regex: /^\d{11}$/,                     strip: false },
