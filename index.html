@@ -401,6 +401,13 @@
     color: var(--ink);
   }
 
+  .stat-box-sub {
+    font-size: 11px;
+    color: var(--warning);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+
   /* Info rows */
   .info-rows { border-top: 1px solid var(--line); padding-top: 1rem; margin-bottom: 1.25rem; }
 
@@ -938,6 +945,7 @@
           <div class="stat-box">
             <div class="stat-box-label">Filing frequency</div>
             <div class="stat-box-value" id="stat-filing">—</div>
+            <div class="stat-box-sub" id="stat-filing-note" style="display:none"></div>
           </div>
         </div>
 
@@ -1094,6 +1102,10 @@ const FALLBACK = {
     govLink: "https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst",
     source: "ATO ato.gov.au", verified: "June 2026",
     digitalServicesNote: "Foreign businesses selling digital products to Australian consumers must register for GST once annual sales exceed A$75,000.",
+    filingRule: {
+      type: 'above-turnover', threshold: 20000000, triggeredLabel: 'Monthly (mandatory)',
+      note: 'Monthly BAS lodgement becomes compulsory once GST turnover reaches A$20 million.',
+    },
   },
   CA: {
     name: "Canada", taxName: "GST / HST", currency: "CAD", symbol: "C$",
@@ -1118,6 +1130,10 @@ const FALLBACK = {
     govLink: "https://www.bzst.de/EN/Businesses/VAT/vat_node.html",
     source: "BZSt bzst.de", verified: "June 2026",
     digitalServicesNote: "Selling digital services to EU consumers in other countries? You must charge that country's VAT rate. Simplify using the EU OSS scheme.",
+    filingRule: {
+      type: 'above-vat-payable', threshold: 9000, triggeredLabel: 'Monthly (est.)',
+      note: 'Monthly filing becomes mandatory once your previous year\'s VAT payable exceeds €9,000. Estimated here from revenue × rate — your actual liability may be lower after deducting input VAT.',
+    },
   },
   IE: {
     name: "Ireland", taxName: "VAT", currency: "EUR", symbol: "€",
@@ -1134,6 +1150,10 @@ const FALLBACK = {
     govLink: "https://www.gst.gov.in/",
     source: "GST Council gst.gov.in", verified: "June 2026",
     digitalServicesNote: "E-commerce and digital service providers face different rules. Inter-state supplies can be taxable from the first rupee — check with a GST practitioner.",
+    filingRule: {
+      type: 'below-turnover-optional', threshold: 50000000,
+      note: 'Quarterly filing (QRMP scheme) is optional if turnover stays under ₹5 crore — tax is still paid monthly, but GSTR-3B is filed quarterly.',
+    },
   },
   IT: {
     name: "Italy", taxName: "IVA (VAT)", currency: "EUR", symbol: "€",
@@ -1158,6 +1178,10 @@ const FALLBACK = {
     govLink: "https://www.sars.gov.za/types-of-tax/value-added-tax/",
     source: "SARS sars.gov.za", verified: "June 2026",
     digitalServicesNote: "Foreign suppliers of digital services to South African consumers must register for VAT with no threshold exemption.",
+    filingRule: {
+      type: 'above-turnover', threshold: 30000000, triggeredLabel: 'Monthly (Category C)',
+      note: 'Monthly filing (Category C) becomes compulsory once taxable turnover reaches R30 million.',
+    },
   },
 };
 
@@ -1321,7 +1345,25 @@ function checkVAT() {
     : mustRegister && pct > 100 ? Math.round(pct) + '% (exceeded)'
     : Math.round(pct) + '%';
   document.getElementById('stat-rate').textContent = country.rate + '%';
-  document.getElementById('stat-filing').textContent = country.filing;
+
+  // Filing frequency — some countries escalate to mandatory monthly (or unlock
+  // optional quarterly relief) once turnover or estimated VAT payable crosses
+  // a threshold. See country.filingRule for the mechanism per country.
+  const filingNoteEl = document.getElementById('stat-filing-note');
+  filingNoteEl.style.display = 'none';
+  filingNoteEl.textContent = '';
+  let filingLabel = country.filing;
+  if (country.filingRule) {
+    const rule = country.filingRule;
+    const basisValue = rule.type === 'above-vat-payable' ? vatAmount : revenue;
+    const triggered = rule.type === 'below-turnover-optional' ? basisValue < rule.threshold : basisValue >= rule.threshold;
+    if (triggered) {
+      if (rule.triggeredLabel) filingLabel = rule.triggeredLabel;
+      filingNoteEl.textContent = rule.note;
+      filingNoteEl.style.display = 'block';
+    }
+  }
+  document.getElementById('stat-filing').textContent = filingLabel;
 
   // Info rows
   document.getElementById('row-must-register').textContent =
