@@ -162,180 +162,178 @@
     padding: 0 1.5rem 4rem;
   }
 
-  /* SEARCH + FILTER */
-  .controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .search-box {
-    flex: 1;
-    min-width: 200px;
-    height: 40px;
-    padding: 0 14px 0 38px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24' stroke='%238a8a8a' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E") no-repeat 12px center;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    color: var(--ink);
-    outline: none;
-  }
-
-  .search-box:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,92,255,0.1); }
-
-  .filter-btn {
-    height: 40px;
-    padding: 0 14px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: #fff;
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s, color 0.15s;
-  }
-
-  .filter-btn.active {
-    border-color: var(--accent);
-    background: var(--accent-pale);
-    color: var(--accent-text);
-  }
-
-  /* COUNTRY CARDS */
-  .country-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 1rem;
-  }
-
-  .country-card {
+  /* COUNTRY TABLE */
+  .table-wrap {
     background: #fff;
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
-    padding: 1.25rem;
-    transition: box-shadow 0.15s, border-color 0.15s;
+    overflow-x: auto;
   }
 
-  .country-card:hover {
-    border-color: var(--paper-3);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  .country-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 780px;
   }
 
-  .country-card.hidden { display: none; }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 1rem;
-  }
-
-  .card-flag { font-size: 26px; line-height: 1; }
-
-  .card-title h3 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .card-title span {
-    font-size: 12px;
-    color: var(--ink-3);
-  }
-
-  .card-tag {
-    margin-left: auto;
+  .country-table th {
+    text-align: left;
     font-size: 11px;
-    font-weight: 600;
-    background: var(--accent-pale);
-    color: var(--accent-text);
-    padding: 3px 8px;
-    border-radius: 99px;
-  }
-
-  .card-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 1rem;
-  }
-
-  .stat {
-    background: var(--paper);
-    border-radius: var(--radius);
-    padding: 8px 10px;
-  }
-
-  .stat-label {
-    font-size: 10px;
     font-weight: 600;
     color: var(--ink-3);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    margin-bottom: 2px;
+    padding: 12px 14px;
+    border-bottom: 2px solid var(--line);
+    white-space: nowrap;
   }
 
-  .stat-value {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--ink);
+  .th-inner { display: flex; align-items: center; gap: 4px; }
+  .sort-indicator { display: inline-flex; color: var(--accent); flex-shrink: 0; }
+
+  .th-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: none;
+    background: transparent;
+    color: var(--ink-3);
+    cursor: pointer;
+    border-radius: 4px;
+    flex-shrink: 0;
   }
 
-  .stat-value.big { font-size: 14px; }
+  .th-filter-btn:hover { background: var(--paper); color: var(--ink); }
+  .th-filter-btn.active { color: var(--accent); }
+  .th-filter-btn svg { pointer-events: none; }
 
-  .card-rows { border-top: 1px solid var(--line); padding-top: 0.75rem; }
+  .filter-popover {
+    position: fixed;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    width: 220px;
+    z-index: 100;
+    display: none;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+  }
 
-  .card-row {
+  .filter-popover.open { display: block; }
+
+  .filter-popover-sort {
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .filter-popover-sort button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    text-align: left;
+    color: var(--ink-2);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 6px 6px;
+    border-radius: 4px;
+  }
+
+  .filter-popover-sort button:hover { background: var(--paper); color: var(--ink); }
+
+  .filter-popover-actions {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    padding: 5px 0;
-    gap: 1rem;
+    padding: 8px 10px;
     border-bottom: 1px solid var(--line);
-    font-size: 12px;
   }
 
-  .card-row:last-child { border-bottom: none; }
-
-  .card-row-label { color: var(--ink-3); flex-shrink: 0; }
-  .card-row-val { color: var(--ink); font-weight: 500; text-align: right; }
-
-  .card-footer {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .btn-card-primary {
-    flex: 1 1 100%;
-    height: 36px;
-    background: var(--accent);
-    color: #fff;
+  .filter-popover-actions button {
+    background: none;
     border: none;
-    border-radius: var(--radius);
+    color: var(--accent);
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: none;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.15s;
+    padding: 2px 4px;
   }
 
-  .btn-card-primary:hover { background: #1240cc; }
+  .filter-popover-actions button:hover { text-decoration: underline; }
 
-  .btn-card-secondary {
-    flex: 1 1 0;
-    height: 34px;
+  .filter-popover-list {
+    max-height: 240px;
+    overflow-y: auto;
+    padding: 6px 0;
+  }
+
+  .filter-popover-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .filter-popover-item:hover { background: var(--paper); }
+  .filter-popover-item input { cursor: pointer; }
+
+  .country-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+    color: var(--ink-2);
+  }
+
+  .country-table tr:last-child td { border-bottom: none; }
+  .country-table tr:hover td { background: var(--paper); }
+  .country-table tr.hidden { display: none; }
+
+  .country-table th:first-child,
+  .country-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: #fff;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+    width: 92px;
+    max-width: 92px;
+    white-space: normal;
+  }
+
+  .country-table tr:hover td:first-child { background: var(--paper); }
+
+  .row-name { font-weight: 600; color: var(--ink); display: block; line-height: 1.25; }
+  .row-tax { font-size: 11px; color: var(--ink-3); display: block; margin-top: 2px; }
+
+  .region-tag {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--accent-pale);
+    color: var(--accent-text);
+    padding: 2px 7px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  .rate-val { font-weight: 700; color: var(--ink); }
+  .threshold-val { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+  .table-actions { display: flex; gap: 6px; white-space: nowrap; }
+
+  .btn-table {
+    height: 30px;
     padding: 0 10px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -346,22 +344,26 @@
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    transition: background 0.15s;
+    transition: background 0.15s, border-color 0.15s;
   }
 
-  .btn-card-secondary svg { flex-shrink: 0; }
+  .btn-table:hover { background: var(--paper-2); }
 
-  .btn-card-secondary:hover { background: var(--paper-2); }
+  .btn-table.primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
 
-  @media (max-width: 420px) {
-    .btn-card-secondary { font-size: 11px; padding: 0 6px; }
+  .btn-table.primary:hover { background: #1240cc; }
+
+  .table-hint {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-top: 0.75rem;
   }
 
   .no-results {
@@ -456,21 +458,24 @@
   </script>
 </div>
 <div class="wrap">
-  <div class="controls">
-    <input class="search-box" type="text" id="search" placeholder="Search countries…" oninput="filterCards()" />
-    <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
-    <button class="filter-btn" data-filter="eu" onclick="setFilter('eu', this)">EU</button>
-    <button class="filter-btn" data-filter="other" onclick="setFilter('other', this)">Non-EU</button>
-  </div>
-
   <div class="data-note">
     <div class="data-note-dot"></div>
     Data verified June 2026 from official government sources. Tax rules change — always verify before acting.
   </div>
 
-  <div class="country-grid" id="country-grid"></div>
-  <div class="no-results" id="no-results">No countries match your search.</div>
+  <div class="table-wrap">
+    <table class="country-table">
+      <thead>
+        <tr id="table-head-row"></tr>
+      </thead>
+      <tbody id="country-table-body"></tbody>
+    </table>
+  </div>
+  <div class="table-hint">Click a column heading's arrow to filter it — like Excel. Click a country's guide for full registration steps.</div>
+  <div class="no-results" id="no-results">No countries match your filters.</div>
 </div>
+
+<div class="filter-popover" id="filter-popover"></div>
 
 <footer>
   <span>© 2026 VATchecker — free tools for small businesses. Rates updated June 2026.</span>
@@ -493,7 +498,7 @@ const COUNTRIES = [
     threshold: 75000, rate: 10, reducedRate: null, zeroRate: false,
     filing: 'Quarterly (BAS)', deadline: 'Within 21 days of exceeding threshold',
     govLink: 'https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/registering-for-gst', source: 'ATO ato.gov.au',
-    notes: 'Non-profit organisations have a higher threshold of A$150,000. Taxi drivers and ride-share drivers must register regardless of turnover.',
+    notes: 'Quarterly is the default, but monthly lodgement becomes compulsory once GST turnover reaches A$20 million. Non-profit organisations have a higher registration threshold of A$150,000. Taxi drivers and ride-share drivers must register regardless of turnover.',
   },
   {
     code: 'CA', flag: '🇨🇦', name: 'Canada', currency: 'CAD', symbol: 'C$',
@@ -561,95 +566,196 @@ const COUNTRIES = [
   },
 ];
 
-let activeFilter = 'all';
+// Column definitions: each derives a display value and a filter value per country.
+const COLUMNS = [
+  { key: 'country', label: 'Country', type: 'text', getValue: c => c.name, getSortValue: c => c.name.toLowerCase() },
+  { key: 'region', label: 'Region', type: 'text', getValue: c => c.region === 'eu' ? 'EU' : 'Non-EU', getSortValue: c => c.region === 'eu' ? 'eu' : 'non-eu' },
+  { key: 'rate', label: 'Standard rate', type: 'numeric', getValue: c => c.rate + '%', getSortValue: c => c.rate },
+  { key: 'reduced', label: 'Reduced rate', type: 'numeric', getValue: c => c.reducedRate ? c.reducedRate + '%' : 'None', getSortValue: c => c.reducedRate || 0 },
+  { key: 'threshold', label: 'Reg. threshold', type: 'numeric', getValue: c => c.threshold === 0 ? 'None' : c.symbol + Math.round(c.threshold).toLocaleString(), getSortValue: c => c.threshold },
+  { key: 'filing', label: 'Filing', type: 'text', getValue: c => c.filing, getSortValue: c => c.filing.toLowerCase() },
+];
 
-function fmt(symbol, amount) {
-  if (amount === 0) return 'None';
-  return symbol + Math.round(amount).toLocaleString();
+// filters[key] = Set of currently-allowed values for that column (starts as "all").
+const filters = {};
+COLUMNS.forEach(col => {
+  filters[col.key] = new Set(COUNTRIES.map(col.getValue));
+});
+
+const FILTER_ICON = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>';
+const SORT_ICON_ASC = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"/></svg>';
+const SORT_ICON_DESC = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14M19 12l-7 7-7-7"/></svg>';
+let currentSort = { key: null, direction: null };
+
+function sortColumn(key, direction) {
+  const col = COLUMNS.find(c => c.key === key);
+  const body = document.getElementById('country-table-body');
+  const rows = Array.from(body.children);
+
+  rows.sort((rowA, rowB) => {
+    const a = COUNTRIES.find(c => c.code === rowA.dataset.code);
+    const b = COUNTRIES.find(c => c.code === rowB.dataset.code);
+    const va = col.getSortValue(a);
+    const vb = col.getSortValue(b);
+    const cmp = typeof va === 'number' ? va - vb : va.localeCompare(vb);
+    return direction === 'asc' ? cmp : -cmp;
+  });
+
+  rows.forEach(r => body.appendChild(r));
+
+  currentSort = { key, direction };
+  COLUMNS.forEach(c => {
+    document.getElementById('sort-ind-' + c.key).innerHTML = '';
+  });
+  document.getElementById('sort-ind-' + key).innerHTML = direction === 'asc' ? SORT_ICON_ASC : SORT_ICON_DESC;
+
+  closeFilterMenu();
 }
 
-function buildCards() {
-  const grid = document.getElementById('country-grid');
-  grid.innerHTML = '';
-  COUNTRIES.forEach(c => {
-    const card = document.createElement('div');
-    card.className = 'country-card';
-    card.dataset.region = c.region;
-    card.dataset.name = c.name.toLowerCase();
-
-    card.innerHTML = `
-      <div class="card-header">
-        <span class="card-flag">${c.flag}</span>
-        <div class="card-title">
-          <h3>${c.name}</h3>
-          <span>${c.currency} · ${c.taxName}</span>
-        </div>
-        <span class="card-tag">${c.region === 'eu' ? 'EU' : c.region === 'other' ? 'Non-EU' : ''}</span>
-      </div>
-      <div class="card-stats">
-        <div class="stat">
-          <div class="stat-label">Standard rate</div>
-          <div class="stat-value">${c.rate}%</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Reg. threshold</div>
-          <div class="stat-value big">${c.threshold === 0 ? 'None' : c.symbol + Math.round(c.threshold).toLocaleString()}</div>
-        </div>
-        ${c.reducedRate ? `<div class="stat"><div class="stat-label">Reduced rate</div><div class="stat-value">${c.reducedRate}%</div></div>` : ''}
-        ${c.zeroRate ? `<div class="stat"><div class="stat-label">Zero rate</div><div class="stat-value">Yes</div></div>` : ''}
-      </div>
-      <div class="card-rows">
-        <div class="card-row">
-          <span class="card-row-label">Filing frequency</span>
-          <span class="card-row-val">${c.filing}</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Registration deadline</span>
-          <span class="card-row-val">${c.deadline}</span>
-        </div>
-        <div class="card-row">
-          <span class="card-row-label">Source</span>
-          <span class="card-row-val">${c.source}</span>
-        </div>
-        <div class="card-row" style="display:block;padding:8px 0">
-          <div class="card-row-label" style="margin-bottom:3px">Key rule</div>
-          <div style="font-size:12px;color:var(--ink-2);line-height:1.5">${c.notes}</div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <a class="btn-card-primary" href="index.html?country=${c.code}">Check my threshold →</a>
-        <a class="btn-card-secondary" href="${c.guideUrl}">View full guide →</a>
-        <a class="btn-card-secondary" href="${c.govLink}" target="_blank" rel="noopener">
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-          Official source
-        </a>
+function buildHeader() {
+  const headRow = document.getElementById('table-head-row');
+  headRow.innerHTML = '';
+  COLUMNS.forEach(col => {
+    const th = document.createElement('th');
+    th.innerHTML = `
+      <div class="th-inner">
+        <span>${col.label}</span>
+        <span class="sort-indicator" id="sort-ind-${col.key}"></span>
+        <button class="th-filter-btn" id="th-btn-${col.key}" onclick="toggleFilterMenu(event, '${col.key}')" aria-label="Filter ${col.label}">${FILTER_ICON}</button>
       </div>
     `;
-    grid.appendChild(card);
+    headRow.appendChild(th);
+  });
+  headRow.appendChild(document.createElement('th'));
+}
+
+function buildTable() {
+  const body = document.getElementById('country-table-body');
+  body.innerHTML = '';
+  COUNTRIES.forEach(c => {
+    const row = document.createElement('tr');
+    row.dataset.code = c.code;
+    COLUMNS.forEach(col => { row.dataset[col.key] = col.getValue(c); });
+    row.title = c.notes;
+
+    row.innerHTML = `
+      <td>
+        <span class="row-name">${c.name}</span>
+        <span class="row-tax">${c.currency} · ${c.taxName}</span>
+      </td>
+      <td><span class="region-tag">${c.region === 'eu' ? 'EU' : 'Non-EU'}</span></td>
+      <td><span class="rate-val">${c.rate}%</span></td>
+      <td>${c.reducedRate ? c.reducedRate + '%' : '—'}${c.zeroRate ? ' <span style="color:var(--ink-3);font-size:11px">(+0% zero rate)</span>' : ''}</td>
+      <td><span class="threshold-val">${c.threshold === 0 ? 'None' : c.symbol + Math.round(c.threshold).toLocaleString()}</span></td>
+      <td>${c.filing}</td>
+      <td>
+        <div class="table-actions">
+          <a class="btn-table primary" href="index.html?country=${c.code}">Check</a>
+          <a class="btn-table" href="${c.guideUrl}">Guide →</a>
+        </div>
+      </td>
+    `;
+    body.appendChild(row);
   });
 }
 
-function filterCards() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
+function applyFilters() {
   let visible = 0;
-  document.querySelectorAll('.country-card').forEach(card => {
-    const matchSearch = !q || card.dataset.name.includes(q);
-    const matchFilter = activeFilter === 'all' || card.dataset.region === activeFilter;
-    const show = matchSearch && matchFilter;
-    card.classList.toggle('hidden', !show);
+  document.querySelectorAll('#country-table-body tr').forEach(row => {
+    const show = COLUMNS.every(col => filters[col.key].has(row.dataset[col.key]));
+    row.classList.toggle('hidden', !show);
     if (show) visible++;
   });
   document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+
+  COLUMNS.forEach(col => {
+    const allCount = new Set(COUNTRIES.map(col.getValue)).size;
+    document.getElementById('th-btn-' + col.key).classList.toggle('active', filters[col.key].size < allCount);
+  });
 }
 
-function setFilter(filter, btn) {
-  activeFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  filterCards();
+let openPopoverKey = null;
+
+function toggleFilterMenu(event, key) {
+  event.stopPropagation();
+  const popover = document.getElementById('filter-popover');
+  if (openPopoverKey === key && popover.classList.contains('open')) {
+    closeFilterMenu();
+    return;
+  }
+  openPopoverKey = key;
+
+  const col = COLUMNS.find(c => c.key === key);
+  const uniqueValues = [...new Set(COUNTRIES.map(col.getValue))].sort((a, b) =>
+    key === 'rate' || key === 'reduced' ? parseFloat(a) - parseFloat(b) : a.localeCompare(b)
+  );
+
+  const sortLabels = col.type === 'numeric'
+    ? ['Smallest to largest', 'Largest to smallest']
+    : ['A → Z', 'Z → A'];
+
+  popover.innerHTML = `
+    <div class="filter-popover-sort">
+      <button onclick="sortColumn('${key}', 'asc')">${SORT_ICON_ASC} ${sortLabels[0]}</button>
+      <button onclick="sortColumn('${key}', 'desc')">${SORT_ICON_DESC} ${sortLabels[1]}</button>
+    </div>
+    <div class="filter-popover-actions">
+      <button onclick="selectAllFilter('${key}')">Select all</button>
+      <button onclick="clearFilter('${key}')">Clear</button>
+    </div>
+    <div class="filter-popover-list">
+      ${uniqueValues.map(val => `
+        <label class="filter-popover-item">
+          <input type="checkbox" data-value="${val}" ${filters[key].has(val) ? 'checked' : ''} onchange="onFilterCheckboxChange('${key}', this)" />
+          ${val}
+        </label>
+      `).join('')}
+    </div>
+  `;
+
+  const btn = event.currentTarget;
+  const rect = btn.getBoundingClientRect();
+  popover.style.top = (rect.bottom + 4) + 'px';
+  let left = rect.left;
+  if (left + 220 > window.innerWidth - 10) left = window.innerWidth - 230;
+  popover.style.left = Math.max(10, left) + 'px';
+  popover.classList.add('open');
 }
 
-buildCards();
+function closeFilterMenu() {
+  document.getElementById('filter-popover').classList.remove('open');
+  openPopoverKey = null;
+}
+
+function onFilterCheckboxChange(key, checkbox) {
+  const val = checkbox.dataset.value;
+  if (checkbox.checked) filters[key].add(val);
+  else filters[key].delete(val);
+  applyFilters();
+}
+
+function selectAllFilter(key) {
+  const col = COLUMNS.find(c => c.key === key);
+  filters[key] = new Set(COUNTRIES.map(col.getValue));
+  document.querySelectorAll('#filter-popover input[type="checkbox"]').forEach(cb => cb.checked = true);
+  applyFilters();
+}
+
+function clearFilter(key) {
+  filters[key] = new Set();
+  document.querySelectorAll('#filter-popover input[type="checkbox"]').forEach(cb => cb.checked = false);
+  applyFilters();
+}
+
+document.addEventListener('click', (e) => {
+  const popover = document.getElementById('filter-popover');
+  if (popover.classList.contains('open') && !popover.contains(e.target)) {
+    closeFilterMenu();
+  }
+});
+
+buildHeader();
+buildTable();
 
 
 </script>
