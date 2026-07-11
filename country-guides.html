@@ -45,7 +45,7 @@
 
   body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #fafaf8 0%, #f5f3f8 50%, #f0eefd 100%);
+    background: linear-gradient(180deg, #fafaf9 0%, #f4f5f7 100%);
     color: var(--ink);
     font-size: 15px;
     line-height: 1.6;
@@ -403,6 +403,16 @@
 
   footer a { color: var(--ink-3); text-decoration: none; }
   footer a:hover { color: var(--ink-2); }
+
+  /* Aesthetic polish */
+  nav { box-shadow: 0 1px 3px rgba(15,15,15,0.04); }
+  .logo { font-weight: 600; }
+  h1, h2, h3 { letter-spacing: -0.01em; }
+  ::selection { background: var(--accent-pale); color: var(--ink); }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 </style>
 </head>
 <body>
