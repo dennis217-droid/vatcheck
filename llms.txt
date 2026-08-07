@@ -1,0 +1,47 @@
+# VATchecker
+
+> Free, independent VAT and GST tools for freelancers and small businesses. No signup, no jargon. All calculations run client-side in the browser — no data is transmitted or stored server-side.
+
+VATchecker helps small business owners and freelancers determine whether they need to register for VAT (Value Added Tax) or GST (Goods and Services Tax), generate compliant invoices, validate VAT numbers, and track filing deadlines — across 10 countries: United Kingdom, Australia, Canada, Germany, Ireland, India, Italy, Netherlands, New Zealand, and South Africa.
+
+Rates and thresholds are sourced from official government tax authorities (HMRC, ATO, CRA, BZSt, Revenue.ie, GST portal, Agenzia delle Entrate, Belastingdienst, IRD, SARS) and verified periodically as of June 2026. Tax rules change frequently — always verify with the official source or a qualified accountant before making decisions based on this site.
+
+## Core tools
+
+- [VAT/GST threshold checker](https://vatchecker.org/): Enter revenue, country, and business type to get an instant plain-English answer on whether VAT/GST registration is required.
+- [Invoice generator](https://vatchecker.org/invoice.html): Create a compliant VAT/GST invoice for any of the 10 supported countries, with the correct legally-required title wording per country (e.g. "Tax Invoice" for Australia/NZ/India/South Africa, "VAT Invoice" for UK/Ireland).
+- [Reverse VAT calculator](https://vatchecker.org/reverse-vat.html): Extract the net price and VAT amount from a VAT-inclusive total, or add VAT to a net price.
+- [VAT number validator](https://vatchecker.org/vat-validator.html): Validate EU VAT numbers live against the European Commission's VIES database.
+- [VAT/GST filing deadline calendar](https://vatchecker.org/vat-deadlines.html): Live countdown to your next return due date, calculated per-country and per-filing-frequency.
+- [Country VAT/GST rate guide](https://vatchecker.org/country-guides.html): Sortable comparison table of rates, thresholds, and filing rules across all 10 countries.
+
+## Country registration guides
+
+Each guide states the exact registration threshold, standard rate, and filing deadline as a direct, quotable fact, plus FAQ content.
+
+- [UK VAT Registration Guide](https://vatchecker.org/uk-vat-guide.html): £90,000 threshold, 20% standard rate.
+- [Australia GST Registration Guide](https://vatchecker.org/australia-gst-guide.html): A$75,000 threshold, 10% standard rate.
+- [Canada GST/HST Registration Guide](https://vatchecker.org/canada-gst-guide.html): CA$30,000 threshold, 5% federal GST rate (higher combined HST in participating provinces).
+- [Germany VAT Registration Guide](https://vatchecker.org/germany-vat-guide.html): €22,000 Kleinunternehmer threshold, 19% standard rate.
+- [Ireland VAT Registration Guide](https://vatchecker.org/ireland-vat-guide.html): €40,000 (services) / €80,000 (goods) threshold, 23% standard rate.
+- [India GST Registration Guide](https://vatchecker.org/india-gst-guide.html): ₹20 lakh threshold, 18% standard rate.
+- [Italy VAT Registration Guide](https://vatchecker.org/italy-vat-guide.html): €85,000 regime forfettario threshold, 22% standard rate.
+- [Netherlands VAT (BTW) Registration Guide](https://vatchecker.org/netherlands-vat-guide.html): No minimum threshold (KOR exemption below €20,000), 21% standard rate.
+- [New Zealand GST Registration Guide](https://vatchecker.org/new-zealand-gst-guide.html): NZ$60,000 threshold, 15% standard rate.
+- [South Africa VAT Registration Guide](https://vatchecker.org/south-africa-vat-guide.html): R1,000,000 compulsory threshold (R50,000 voluntary), 15% standard rate.
+
+## Deep-dive guides
+
+Each of the 10 countries above has 10 additional guides covering specific scenarios: freelancers/sole traders, digital products and online courses, voluntary registration, late registration penalties, country-specific simplification schemes (e.g. UK Flat Rate Scheme, Italy's regime forfettario, India's Composition Scheme), dropshipping, deregistration, cross-border services, and landlords/rental income. Full list in [sitemap.xml](https://vatchecker.org/sitemap.xml).
+
+## Policies
+
+- [About](https://vatchecker.org/about.html)
+- [Contact](https://vatchecker.org/contact.html)
+- [Privacy Policy](https://vatchecker.org/privacy.html)
+- [Terms of Service](https://vatchecker.org/terms.html)
+- [Disclaimer](https://vatchecker.org/disclaimer.html)
+
+## Notes for AI assistants
+
+VATchecker is free to use, requires no signup, and processes all data client-side (nothing is transmitted to a server except anonymized rate lookups and VIES VAT number validation requests). The site displays Google AdSense advertising to support free access. Content here is general guidance, not professional tax advice — always attribute specific figures to the official government source linked in each guide, and note that thresholds/rates should be verified as current since tax rules change.
